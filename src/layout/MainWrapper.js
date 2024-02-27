@@ -4,8 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ImageBackground, Text } from 'react-native';
 import bgImage from '../assets/svg/bgImage.png'
 import Login from '../screens/login';
-import Home from '../screens/home';
 import { View } from 'react-native-web';
+import ComponentsPage from '../screens/components/';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,19 +15,7 @@ const navigationConfig = {
         screens: {
             Home: '',
             Login: 'login',
-            Logout: 'logout',
-            ForgotPassword: 'forgot-password',
-            ChoosePricing: 'choose-pricing',
-            WhoSubscribe: 'who-subscribe',
-            Payment: 'payment',
-            ResidentialNotes: 'residential-notes',
-            Communication: 'communication',
-            Residents: 'residents',
-            Staffs: 'staffs',
-            Facilities: 'facilities',
-            Account: 'account',
-            EditStaffProfile: 'edit-staff-profile',
-            AccountSetting: 'account-setting',
+            ComponentsPage: "ComponentsPage"
         },
     },
 };
