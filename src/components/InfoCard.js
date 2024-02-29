@@ -12,29 +12,29 @@ export default function InfoCard({
 }) {
 
     const classes = className(
-        "flex font-sans shrink-0 bg-white px-[40px] py-[40px] rounded-[31px]",
+        "flex font-sans shrink-0 bg-white px-[40px] py-[40px] rounded-[31px] w-auto",
         rest.className
     );
 
     const imgContainerClassess = className(
         "flex relative -z-10",
         {
-            "w-[180px]": imagePosition == "right",
-            "w-[279px]": imagePosition == "left"
+            "lg:w-[180px]": imagePosition == "right",
+            "lg:w-[279px]": imagePosition == "left"
         }
     )
 
     const imgClassess = className(
-        "absolute w-[214px] h-[450px]",
+        "lg:absolute lg:w-[214px] lg:h-[450px]",
         {
-            "top-[-146px]": imagePosition == "right",
-            "top-[-144px] right-[-110px]": imagePosition == "left"
+            "lg:top-[-146px]": imagePosition == "right",
+            "lg:top-[-144px] lg:right-[-110px]": imagePosition == "left"
         }
     )
 
     return (
         <View {...rest} className={classes}>
-            <View className={`flex ${imagePosition == 'right' ? 'flex-row' : 'flex-row-reverse'} items-center`}>
+            <View className={`flex ${imagePosition == 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center`}>
                 <View className="flex shrink" style={{ gap: '1px' }}>
                     {/* Title */}
                     <View className="flex flex-row items-center">

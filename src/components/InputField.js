@@ -7,6 +7,7 @@ export default function InputField({
     value,
     ...rest
 }) {
+
     return (
         <View className="">
             <Text className="text-[14px] text-secondary">

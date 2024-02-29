@@ -1,4 +1,4 @@
-import { Pressable, Text, Alert } from "react-native"
+import { Pressable, TouchableOpacity, Text, Alert } from "react-native"
 import className from "classnames";
 
 export default function Button({
@@ -43,8 +43,8 @@ export default function Button({
     );
 
     return (
-        <Pressable {...rest} className={classes}>
+        <TouchableOpacity {...rest} className={classes}>
             <Text className={textColor}>{children}</Text>
-        </Pressable>
+        </TouchableOpacity>
     )
 }

@@ -14,10 +14,17 @@ module.exports = {
       'primary': '#26C8B8',
       'secondary': '#828282',
       'success': '#5cb85c',
-      'danger': '#EF4444',
+      'danger': {
+        50:'#FDE8E8',
+        100:'',
+        200:'',
+        300:'',
+        400:'',
+        500:'#EF4444'
+      },
       'white': '#FFF',
       'black': '#000',
-      'purple': '#B693F8'
+      'purple': '#B693F8',
     }
   },
   plugins: [nativewind()],

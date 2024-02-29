@@ -5,7 +5,7 @@ import MainWrapper from './src/layout/MainWrapper';
 
 export default function App() {
   return (
-    <View className="flex-1 justify-center">
+    <View className="flex-1 justify-center overflow-auto">
       <MainWrapper />
     </View>
   )
