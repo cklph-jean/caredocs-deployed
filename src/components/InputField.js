@@ -9,7 +9,7 @@ export default function InputField({
 }) {
 
     return (
-        <View className="">
+        <View>
             <Text className="text-[14px] text-secondary">
                 {label}
             </Text>

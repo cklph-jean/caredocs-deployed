@@ -18,7 +18,7 @@ export default function Button({
     ...rest
 }) {
     const classes = className(
-        "font-sans font-normal flex items-center transition duration-500 ease-in-out justify-center",
+        "font-sans font-normal flex items-center transition duration-500 ease-in-out justify-center py-[12px] px-[18px]",
         {
             "opacity-80": loading,
             "border border-primary bg-primary text-white": primary && !outline,
@@ -44,7 +44,7 @@ export default function Button({
 
     return (
         <TouchableOpacity {...rest} className={classes}>
-            <Text className={textColor}>{children}</Text>
+            <Text className={textColor || 'text-white'}>{children}</Text>
         </TouchableOpacity>
     )
 }

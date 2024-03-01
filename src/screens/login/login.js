@@ -13,6 +13,9 @@ import Button from "../../components/Button";
 import Link from "../../components/Link";
 import useToggle from "../../hooks/useToggle";
 import StatusCard from "../../components/StatusCard";
+import Card from "../../components/Card";
+
+
 export default function Login({ navigation }) {
   const [isPasswordOpen, setIsPasswordOpen] = useToggle(false);
 
@@ -58,9 +61,9 @@ export default function Login({ navigation }) {
   return (
 
     <View
-      className={`font-sans bg-[url('./src/assets/svg/bgImage.png')] bg-cover lg:flex-1 items-center w-full justify-center`}>
+      className={`font-sans flex-1 items-center xl:justify-center`}>
 
-      <View className="flex flex-col-reverse lg:flex-row flex-wrap justify-between w-full items-center lg:px-20" style={{ gap: '20px' }}>
+      <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
         {/* Left Area */}
         <View className="lg:flex" style={{ gap: '7rem' }}>
 
@@ -93,7 +96,8 @@ export default function Login({ navigation }) {
         {/* Right Area */}
         <View className="flex-1 flex-col items-center self-stretch">
 
-          <View className="w-[356px]">
+          <View className="lg:w-[356px]">
+
             <View className="">
               {/* Logo */}
               <View className="flex flex-row mt-[32px] mb-[16px] justify-center">
@@ -107,7 +111,7 @@ export default function Login({ navigation }) {
               </View>
               {/* End of Logo */}
 
-              <View className="mt-[32px]">
+              <Card className="mt-[32px]">
                 <Text className="font-tt-commons-medium font-bold text-[28px]">
                   Welcome back!
                 </Text>
@@ -115,7 +119,7 @@ export default function Login({ navigation }) {
                 <Text className="mt-[12px] text-[16px] font-sans lead-[22px]">
                   Manage your facility administration process more easily with CareDocs.
                 </Text>
-              </View>
+              </Card>
             </View>
 
 
@@ -156,7 +160,7 @@ export default function Login({ navigation }) {
                   screenName="forgot-password"
                   text="Forgot Password" />
 
-                  
+
               </View>
 
               <View className="flex flex-col items-start" style={{ gap: '16px' }}>
@@ -172,8 +176,9 @@ export default function Login({ navigation }) {
                   <Text className="font-sans font-normal">Looking to get started? </Text>
                   <Link
                     className="text-purple"
-                    text="Create account"
-                    url="create-account" />
+                    navigation={navigation}
+                    screenName="create-account"
+                    text="Create account" />
                 </View>
               </View>
             </View>
