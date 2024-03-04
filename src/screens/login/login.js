@@ -61,7 +61,7 @@ export default function Login({ navigation }) {
   return (
 
     <View
-      className={`font-sans flex-1 items-center xl:justify-center`}>
+      className={`font-sans justify-center min-h-screen items-center xl:justify-center`}>
 
       <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
         {/* Left Area */}
@@ -168,7 +168,7 @@ export default function Login({ navigation }) {
                   onPress={setIsFailedLogin}
                   primary
                   rounded
-                  textColor="text-white"
+                  textClass="text-white"
                   className="flex-none py-[12px] px-[18px]" > Login </Button>
 
 
