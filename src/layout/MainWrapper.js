@@ -1,13 +1,30 @@
 import { useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ImageBackground, Text } from 'react-native';
-import bgImage from '../assets/svg/bgImage.png'
-import Login from '../screens/login';
-import Home from '../screens/home';
-import { View } from 'react-native-web';
+import { View } from 'react-native';
+import { PageTitle } from '../utils/string-utils'
 
-const Stack = createNativeStackNavigator();
+// Singed Out Stacks
+import Login from '../screens/login';
+import ForgotPassword from '../screens/forgot-password'
+import CreateAccount from '../screens/create-account';
+// End of Signed Out Stacks
+
+const SignedInStack = createNativeStackNavigator();
+const SignedOutStack = createNativeStackNavigator();
+
+const SignedOutNavigator = () => {
+    return <SignedOutStack.Navigator>
+        <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
+        <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
+        <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
+    </SignedOutStack.Navigator>
+}
+
+const SignedInNavigator = () => {
+    return <SignedInStack.Navigator></SignedInStack.Navigator>
+}
+
 
 const navigationConfig = {
     prefixes: ['https://caredocs.com', 'caredocs://'],
@@ -15,50 +32,30 @@ const navigationConfig = {
         screens: {
             Home: '',
             Login: 'login',
-            Logout: 'logout',
-            ForgotPassword: 'forgot-password',
-            ChoosePricing: 'choose-pricing',
-            WhoSubscribe: 'who-subscribe',
-            Payment: 'payment',
-            ResidentialNotes: 'residential-notes',
-            Communication: 'communication',
-            Residents: 'residents',
-            Staffs: 'staffs',
-            Facilities: 'facilities',
-            Account: 'account',
-            EditStaffProfile: 'edit-staff-profile',
-            AccountSetting: 'account-setting',
+            ForgotPassword: "forgot-password",
+            CreateAccount: "create-account"
         },
     },
 };
 
 export default function MainWrapper() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAuthenticated, setisAuthenticated] = useState(false);
+
     return (
-        <ImageBackground source={bgImage} resizeMode="cover" className="flex-1 justify-center w-[100%]">
-            <NavigationContainer
-                linking={navigationConfig}
-                documentTitle={{
-                    formatter: (options, route) => `${options?.title ?? route?.name ?? 'Home'} | CareDocs`,
-                }}>
-                <Stack.Navigator>
+        <NavigationContainer
+            linking={navigationConfig}
+            documentTitle={{
+                formatter: (options, route) => `${options?.title ?? PageTitle(route?.name) ?? 'Home'} | CareDocs`,
+            }}>
+            <View className="flex-1 bg-[url('./src/assets/svg/bgImage.png')] bg-cover items-center xl:justify-center py-10 lg:px-20 overflow-y-auto">
+                <View className="w-full">
                     {
-                        !isLoggedIn ?
-                            (
-                                <Stack.Group>
-                                    <Stack.Screen
-                                        name='Login'
-                                        options={{
-                                            headerShown: false,
-                                        }}
-                                        component={Login}
-                                    />
-                                </Stack.Group>
-                            )
-                            : ''
+                        !isAuthenticated ? <SignedOutNavigator /> : <SignedInNavigator />
                     }
-                </Stack.Navigator>
-            </NavigationContainer>
-        </ImageBackground>
+
+                </View>
+            </View>
+
+        </NavigationContainer>
     )
 }
