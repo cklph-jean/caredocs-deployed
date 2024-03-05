@@ -10,6 +10,7 @@ import personImage2 from '../../assets/svg/LoginImage2.png';
 import LogoImage from '../../assets/svg/Logo.svg';
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
+import BigText from "../../components/BigText"
 import Link from "../../components/Link";
 import useToggle from "../../hooks/useToggle";
 import StatusCard from "../../components/StatusCard";
@@ -46,9 +47,9 @@ export default function Login({ navigation }) {
 
 
     const findCareDocsTitle = <>
-        <Text className="text-[32px] font-[600] font-tt-commons-medium">
+        <BigText>
             Find your CareDocs!
-        </Text>
+        </BigText>
     </>
     const findCareDocsDescription = `Every great feature you need for seamless care management is right at your fingertips.`;
 
@@ -72,6 +73,7 @@ export default function Login({ navigation }) {
                         <InfoCard
                             className="lg:w-[624px]"
                             imagePosition="right"
+                            imageClass="lg:w-[214px] lg:h-[450px] lg:top-[-146px]"
                             imagePath={personImage1}
                             title={welcomeTitle}
                             description={welcomeDescription}
@@ -84,6 +86,7 @@ export default function Login({ navigation }) {
                         <InfoCard
                             className="lg:w-[732px] lg:h-[228px]"
                             imagePosition="left"
+                            imageClass="lg:w-[214px] lg:h-[450px] lg:top-[-144px] lg:right-[-110px]"
                             imagePath={personImage2}
                             title={findCareDocsTitle}
                             description={findCareDocsDescription}
@@ -177,7 +180,7 @@ export default function Login({ navigation }) {
                                     <Link
                                         className="text-purple"
                                         navigation={navigation}
-                                        screenName="create-account"
+                                        screenName="choose-your-package"
                                         text="Create account" />
                                 </View>
                             </View>

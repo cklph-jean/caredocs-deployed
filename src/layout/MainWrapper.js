@@ -8,6 +8,8 @@ import { PageTitle } from '../utils/string-utils'
 import Login from '../screens/login';
 import ForgotPassword from '../screens/forgot-password'
 import CreateAccount from '../screens/create-account';
+import ChooseYourPackage from '../screens/create-account/choose-your-package';
+import PaymentMethod from '../screens/create-account/payment-method';
 // End of Signed Out Stacks
 
 const SignedInStack = createNativeStackNavigator();
@@ -15,9 +17,11 @@ const SignedOutStack = createNativeStackNavigator();
 
 const SignedOutNavigator = () => {
     return <SignedOutStack.Navigator>
+        <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
-        <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
+        <SignedOutStack.Screen name="choose-your-package" component={ChooseYourPackage} options={{ headerShown: false }} />
+        <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
     </SignedOutStack.Navigator>
 }
 

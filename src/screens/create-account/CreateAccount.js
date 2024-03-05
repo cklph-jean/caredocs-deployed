@@ -1,260 +1,215 @@
-import { Image, Text, View, FlatList } from "react-native";
-import PackagePlanCard from "../../components/PackagePlanCard";
-
+import { useEffect, useState } from "react";
+import { Image, Text, View } from "react-native";
+import InfoCard from "../../components/InfoCard";
+import SignupImage1 from '../../assets/svg/signup/SignupImage1.png';
+import SignupImage2 from '../../assets/svg/signup/SignupImage2.png';
+import Frame from '../../assets/svg/signup/Frame.svg'
+import BigText from "../../components/BigText";
 import LogoImage from '../../assets/svg/Logo.svg';
-import Tabs from "../../components/Tabs";
-import { storeData } from "../../utils/asyncStorage";
+import Card from "../../components/Card";
+import useToggle from "../../hooks/useToggle";
+import InputField from "../../components/InputField";
+import StatusCard from "../../components/StatusCard";
+import Link from "../../components/Link";
+import Button from "../../components/Button";
+import { FiEyeOff, FiEye } from "react-icons/fi";
 
 
-export default function CreateAccount() {
+export default function CreateAccount({ navigation }) {
 
-  const monthlyPackagePlans = [
-    {
-      id: 1,
-      'packageType': 'Starter',
-      'packagePrice': '$79',
-      'packageDescription': 'By creating an Account on our service, you agree to subscribe',
-      'packageDuration': 'Month',
-      'packagePlanInclusions': [
-        {
-          id: 1,
-          inclusion: 'Electronic Health Records (EHR) management'
-        },
-        {
-          id: 2,
-          inclusion: 'Appointment scheduling and reminders'
-        },
-        {
-          id: 3,
-          inclusion: 'Patient communication portal'
-        },
-        {
-          id: 4,
-          inclusion: 'Secure data storage'
-        },
-        {
-          id: 5,
-          inclusion: 'Basic reporting and analytics'
-        }
-      ]
-    },
-    {
-      id: 2,
-      'packageType': 'Pro',
-      'packagePrice': '$99',
-      'packageDescription': 'With all starter package features, include:',
-      'packageDuration': 'Month',
-      'packagePlanInclusions': [
-        {
-          id: 1,
-          inclusion: 'All Basic Package features'
-        },
-        {
-          id: 2,
-          inclusion: 'Telehealth capabilities'
-        },
-        {
-          id: 3,
-          inclusion: 'Billing and invoicing tools'
-        },
-        {
-          id: 4,
-          inclusion: 'Advanced reporting and analytics'
-        },
-        {
-          id: 5,
-          inclusion: 'Integration with pharmacy systems'
-        }
-      ]
-    },
-    {
-      id: 3,
-      'packageType': 'Unlimited',
-      'packagePrice': '$149',
-      'packageDescription': 'With all pro package features, include:',
-      'packageDuration': 'Month',
-      'packagePlanInclusions': [
-        {
-          id: 1,
-          inclusion: 'All Pro Package features'
-        },
-        {
-          id: 2,
-          inclusion: 'Customizable templates and forms'
-        },
-        {
-          id: 3,
-          inclusion: 'Multi-location support'
-        },
-        {
-          id: 4,
-          inclusion: '24/7 customer support'
-        },
-        {
-          id: 5,
-          inclusion: 'Secure patient portal with mobile app'
-        }
-      ]
-    }
-  ];
+  const [isPasswordOpen, setIsPasswordOpen] = useToggle(false);
 
-  const yearlyPackagePlans = [
-    {
-      id: 1,
-      'packageType': 'Starter',
-      'packagePrice': '$79',
-      'packageDescription': 'By creating an Account on our service, you agree to subscribe',
-      'packageDuration': 'Year',
-      'packagePlanInclusions': [
-        {
-          id: 1,
-          inclusion: 'Electronic Health Records (EHR) management'
-        },
-        {
-          id: 2,
-          inclusion: 'Appointment scheduling and reminders'
-        },
-        {
-          id: 3,
-          inclusion: 'Patient communication portal'
-        },
-        {
-          id: 4,
-          inclusion: 'Secure data storage'
-        },
-        {
-          id: 5,
-          inclusion: 'Basic reporting and analytics'
-        }
-      ]
-    },
-    {
-      id: 2,
-      'packageType': 'Pro',
-      'packagePrice': '$99',
-      'packageDescription': 'With all starter package features, include:',
-      'packageDuration': 'Year',
-      'packagePlanInclusions': [
-        {
-          id: 1,
-          inclusion: 'All Basic Package features'
-        },
-        {
-          id: 2,
-          inclusion: 'Telehealth capabilities'
-        },
-        {
-          id: 3,
-          inclusion: 'Billing and invoicing tools'
-        },
-        {
-          id: 4,
-          inclusion: 'Advanced reporting and analytics'
-        },
-        {
-          id: 5,
-          inclusion: 'Integration with pharmacy systems'
-        }
-      ]
-    },
-    {
-      id: 3,
-      'packageType': 'Unlimited',
-      'packagePrice': '$149',
-      'packageDescription': 'With all pro package features, include:',
-      'packageDuration': 'Year',
-      'packagePlanInclusions': [
-        {
-          id: 1,
-          inclusion: 'All Pro Package features'
-        },
-        {
-          id: 2,
-          inclusion: 'Customizable templates and forms'
-        },
-        {
-          id: 3,
-          inclusion: 'Multi-location support'
-        },
-        {
-          id: 4,
-          inclusion: '24/7 customer support'
-        },
-        {
-          id: 5,
-          inclusion: 'Secure patient portal with mobile app'
-        }
-      ]
-    }
-  ];
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isFailedLogin, setIsFailedLogin] = useState(false);
 
-  const handleChoosePackage = (packageData) => {
-    // save somewhere maybe on local storage in the meantime.
-    let chosenPackagePlan = {
-      id: packageData.id,
-      type: packageData.packageType,
-      planDuration: packageData.packageDuration
-    }
+  const handleChange = (setState) => (event) => {
+    setState(event.target.value);
+  };
 
-    storeData('chosenPackagePlan', JSON.stringify(chosenPackagePlan));
+  const handleChangeCountryCode = (code) => {
+    console.log(code);
   }
 
-  const renderedPackagePlanMonthly = monthlyPackagePlans.map((item) => {
-    return <PackagePlanCard key={item.id} data={item} onChoosePackage={handleChoosePackage} />
-  });
+  const handleFormSubmit = () => {
+    setIsFailedLogin(true);
+  }
 
-  const renderedPackagePlanYearly = yearlyPackagePlans.map((item) => {
-    return <PackagePlanCard key={item.id} data={item} onChoosePackage={handleChoosePackage} />
-  });
+  let icon = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
 
-
-  const packagePlanTabs = [
-    {
-      'title': 'Monthly',
-      'disabled': false,
-      'content': (
-        <View className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:h-[550px] max-w-5xl" style={{ gap: '32px' }}>
-          {renderedPackagePlanMonthly}
-        </View>
-      )
-    },
-    {
-      'title': 'Yearly',
-      'disabled': true, 
-      'content': (
-        <View className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:h-[550px] max-w-5xl" style={{ gap: '32px' }}>
-          {renderedPackagePlanYearly}
-        </View>
-      )
-    }
-  ]
-
+  if (isPasswordOpen) {
+    icon = <FiEye className="text-[#828282] w-[20px] h-[20px] p-0" />
+  }
 
   return (
-    <View className="items-center lg:px-5 py-[20px] min-h-screen justify-center">
-      <View className="" style={{ gap: '12px' }}>
+    <View className="items-center lg:px-5 py-[20px] min-h-screen justify-center font-sans">
 
-        {/* Logo */}
-        <View className="flex flex-row justify-center">
-          <Image
-            source={LogoImage}
-            width={'169px'}
-            height={'40px'}
-            alt={'CareDocs Logo'}
-            className="w-[100px] h-[100px]"
-          />
+      <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
+
+        {/* Left Area */}
+        <View className="lg:flex max-w-3xl w-full" style={{ gap: '7rem' }}>
+
+          <View className="">
+
+            <InfoCard
+              className="lg:w-[732.593px]"
+              imageClass="lg:bottom-[-102px] lg:right-[20px]"
+              imagePosition="left"
+              imagePath={SignupImage1}
+              title={<BigText>Unlock Your Care Facility</BigText>}
+              description={`In our commitment to excellence, we stand by you, ready to assist in every way possible to ensure top-tier care to your residents.`}
+            />
+
+          </View>
+
+
+          <View className="flex flex-col lg:items-end">
+            <InfoCard
+              className="lg:w-[651.804px] lg:h-[300px]"
+              imagePosition="right"
+              imageClass="shrink-0 lg:top-[-195px]"
+              imagePath={SignupImage2}>
+
+              <View className="flex flex-col h-full justify-between w-[300px]" style={{ gap: '24px' }}>
+                <Text className="text-[22px] italic font-[600] leading-[28px]">
+                  This app is to become stress-reliever and help them manage the facility more effectively, so I can have a more balanced life.
+                </Text>
+
+                <View className="flex flex-row" style={{ gap: '8px' }}>
+                  <View>
+                    <Image
+                      source={Frame}
+                      alt="Frame Quote"
+                    />
+                  </View>
+
+                  <View className="justify-center">
+                    <Text className="font-[400] text-[16px]">Shaina</Text>
+                    <Text className="font-sans">General Practicioner</Text>
+                  </View>
+                </View>
+              </View>
+            </InfoCard>
+          </View>
+
         </View>
-        {/* End of Logo */}
+        {/* End of Left Area */}
 
-        <Text className="text-[48px] font-tt-commons-medium font-[600] leading-[56px]">Choose your package</Text>
 
-        <Text className="text-[14px] font-sans text-center font-[400] leading-5">Let’s make your administration process more easily with CareDocs.</Text>
+        {/* Right Area */}
+        <View className="flex-1 flex-col items-center self-stretch">
+
+          <View className="lg:w-[356px]">
+
+            <View className="">
+              {/* Logo */}
+              <View className="flex flex-row mt-[32px] mb-[16px] justify-center">
+                <Image
+                  source={LogoImage}
+                  width={'169px'}
+                  height={'40px'}
+                  alt={'CareDocs Logo'}
+                  className="w-[100px] h-[100px]"
+                />
+              </View>
+              {/* End of Logo */}
+
+              <Card className="mt-[32px]">
+                <Text className="font-tt-commons-medium font-bold text-[28px]">
+                  Set your login credential
+                </Text>
+
+                <Text className="mt-[12px] text-[16px] font-sans lead-[22px]">
+                  Let’s make your administration process more easily with CareDocs.
+                </Text>
+              </Card>
+            </View>
+
+            <View className="mt-[24px]" style={{ gap: '32px' }}>
+              <View style={{ gap: '16px' }}>
+
+                <InputField
+                  label="First name"
+                  placeholder="Input your first name here"
+                  value={firstName}
+                  onChange={handleChange(setFirstName)}
+                />
+
+                <InputField
+                  label="Last name"
+                  placeholder="Input your last name here"
+                  value={lastName}
+                  onChange={handleChange(setLastName)}
+                />
+
+                <InputField
+                  label="Phone number"
+                  placeholder="0"
+                  value={phoneNumber}
+                  onChange={handleChange(setPhoneNumber)}
+                  inputType="phone"
+                  onChangeCountryCode={handleChangeCountryCode}
+                />
+
+                <InputField
+                  label="Email"
+                  placeholder="name@email.com"
+                  value={email}
+                  onChange={handleChange(setEmail)}
+                />
+
+                <InputField
+                  label="Create a new password"
+                  placeholder="Input password here"
+                  value={password}
+                  onChange={handleChange(setPassword)}
+                  secureTextEntry={!isPasswordOpen ? true : false}
+                  icon={<Button className="p-0" onPress={setIsPasswordOpen}>{icon}</Button>}
+                />
+
+                <InputField
+                  label="Confirmation password"
+                  placeholder="Input password here"
+                  value={password}
+                  onChange={handleChange(setPassword)}
+                  secureTextEntry={!isPasswordOpen ? true : false}
+                  icon={<Button className="p-0" onPress={setIsPasswordOpen}>{icon}</Button>}
+                />
+
+              </View>
+
+              <View className="flex flex-col items-start" style={{ gap: '16px' }}>
+                <Button
+                  onPress={() => navigation.navigate('payment-method')}
+                  primary
+                  rounded
+                  textClass="text-white"
+                  className="flex-none py-[12px] px-[18px]" > Sign up </Button>
+
+
+                <View className="flex flex-row text-[14px] items-center">
+                  <Text className="font-sans font-normal">Already have an account? </Text>
+                  <Link
+                    className="text-purple"
+                    navigation={navigation}
+                    screenName="login"
+                    text="Go to login page" />
+                </View>
+              </View>
+            </View>
+
+
+          </View>
+
+
+        </View>
+        {/* Right Area */}
+
       </View>
 
-      <View className="mt-[32px]">
-        {/* Tabs Here */}
-        <Tabs tabs={packagePlanTabs} />
-      </View>
     </View>
   )
 }
