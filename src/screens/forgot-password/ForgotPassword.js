@@ -13,7 +13,7 @@ export default function ForgotPassword({ navigation }) {
   }
 
   return (
-    <View className="md:flex xl:flex-1 min-h-screen xl:min-h-0 items-center justify-center">
+    <View className="md:flex xl:flex-1 min-h-screen items-center justify-center">
       <View className="w-[356px]">
 
         <Card className="" style={{ gap: '12px' }}>

@@ -47,7 +47,7 @@ export default function MainWrapper() {
             documentTitle={{
                 formatter: (options, route) => `${options?.title ?? PageTitle(route?.name) ?? 'Home'} | CareDocs`,
             }}>
-            <View className="flex-1 bg-[url('./src/assets/svg/bgImage.png')] bg-cover items-center xl:justify-center py-10 lg:px-20 overflow-y-auto">
+            <View className="flex-1 w-full bg-[url('./src/assets/svg/bgImage.png')] bg-cover lg:px-20 overflow-y-auto">
                 <View className="w-full">
                     {
                         !isAuthenticated ? <SignedOutNavigator /> : <SignedInNavigator />

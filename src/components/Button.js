@@ -1,4 +1,4 @@
-import { Pressable, TouchableOpacity, Text, Alert } from "react-native"
+import { Pressable, TouchableOpacity, Text, Alert, TouchableHighlight } from "react-native"
 import className from "classnames";
 
 export default function Button({
@@ -14,7 +14,7 @@ export default function Button({
     loading,
     hover,
     circle,
-    textColor,
+    textClass,
     ...rest
 }) {
     const classes = className(
@@ -43,8 +43,8 @@ export default function Button({
     );
 
     return (
-        <TouchableOpacity {...rest} className={classes}>
-            <Text className={textColor || 'text-white'}>{children}</Text>
-        </TouchableOpacity>
+        <TouchableHighlight {...rest} className={classes}>
+            <Text className={textClass || 'text-white'}>{children}</Text>
+        </TouchableHighlight>
     )
 }

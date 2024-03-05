@@ -26,7 +26,6 @@ export default function AuthProvider({ children }) {
             if (token) {
                 // TODO: set to async storage
                 
-                
                 // set to state
                 setToken(token)
             }
