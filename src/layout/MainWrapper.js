@@ -17,10 +17,10 @@ const SignedOutStack = createNativeStackNavigator();
 
 const SignedOutNavigator = () => {
     return <SignedOutStack.Navigator>
-        <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="choose-your-package" component={ChooseYourPackage} options={{ headerShown: false }} />
+        <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
     </SignedOutStack.Navigator>
 }
