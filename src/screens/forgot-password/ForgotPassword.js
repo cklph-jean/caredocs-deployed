@@ -36,7 +36,7 @@ export default function ForgotPassword({ navigation }) {
         </View>
 
         <View className="items-start" style={{gap:'16px'}}>
-          <Button primary rounded className="flex-none">
+          <Button primary rounded className="flex-none py-[12px] px-[18px]">
             Submit
           </Button>
 
