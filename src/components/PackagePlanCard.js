@@ -46,7 +46,7 @@ export default function PackagePlanCard({
             </View>
 
             <View className="mt-10 lg:mt-0">
-                <Button primary onPress={handlePress} textClass="text-white font-tt-commons-medium" rounded>
+                <Button primary onPress={handlePress} textClass="text-white font-tt-commons-medium  py-[12px] px-[18px]" rounded>
                     Choose this package
                 </Button>
             </View>

@@ -25,17 +25,14 @@ export default function InfoCard({
     )
 
     const imgClassess = className(
-        "lg:absolute lg:w-[214px] lg:h-[450px]",
-        {
-            "lg:top-[-146px]": imagePosition == "right",
-            "lg:top-[-144px] lg:right-[-110px]": imagePosition == "left"
-        }
+        "lg:absolute",
+        rest.imageClass
     )
 
     return (
         <View {...rest} className={classes}>
-            <View className={`flex ${imagePosition == 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center`}>
-                <View className="flex shrink" style={{ gap: '1px' }}>
+            <View className={`h-full flex ${imagePosition == 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center justify-around`}>
+                <View className="h-full flex shrink" style={{ gap: '1px' }}>
                     {/* Title */}
                     <View className="flex flex-row items-center">
                         {title}
@@ -48,6 +45,9 @@ export default function InfoCard({
                         {description}
                     </Text>
                     {/* End of Description */}
+
+                    {/* Can use the children content */}
+                    {children}
                 </View>
 
                 {/* Image ( Right or Left ) */}
