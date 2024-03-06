@@ -8,9 +8,9 @@ export default function Input({ value, placeholder, ...rest }) {
     // conditional class here 
     const inputClasses = classNames(
         rest.className,
-        "px-[16px] py-[12px] bg-white border-[1px] border-[#E6E6E6] w-[356px] text-[14px] placeholder-gray-400 placeholder:font-[400] placeholder:text-[14px] focus:outline-none block w-full h-[44px]",
+        "placeholder:font-sans px-[16px] py-[12px] bg-white border-[1px] border-[#E6E6E6] text-[14px] placeholder-gray-400 placeholder:font-[400] placeholder:text-[14px] focus:outline-none block w-full h-[44px]",
         {
-            "rounded-[5px]": rest.inputType != 'phone',
+            "rounded-[5px]": !rest.customRadius,
             "rounded-r-[5px]": rest.inputType == 'phone'
         }
     );

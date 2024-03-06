@@ -62,7 +62,7 @@ export default function Login({ navigation }) {
     return (
 
         <View
-            className={`font-sans justify-center min-h-screen items-center xl:justify-center`}>
+            className={`font-sans justify-center min-h-screen items-center xl:justify-center  lg:px-20`}>
 
             <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
                 {/* Left Area */}

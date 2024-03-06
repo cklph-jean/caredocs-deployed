@@ -1,0 +1,60 @@
+import className from 'classnames';
+import { useState } from 'react';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { View, Text, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
+
+export default function DropdownSelect({ options, onSelect, label, ...rest }) {
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+
+    const handleSelectOption = (option) => {
+        setSelectedOption(option);
+        setDropdownVisible(false);
+        onSelect(option);
+    };
+
+    const dropdownSelectClasses = className(
+        "font-sans px-[16px] py-[12px] bg-white border-[1px] border-[#E6E6E6] focus:outline-none block w-full h-[44px] relative z-[1]",
+        {
+            "rounded-[5px]": !dropdownVisible,
+            "rounded-t-[5px]": dropdownVisible,
+        }
+    )
+
+    return (
+        <View {...rest} className={dropdownSelectClasses}>
+
+            <Pressable
+                onPress={() => setDropdownVisible(!dropdownVisible)}
+            >
+                <Text className="text-[14px] leading-[20px] text-gray-400 font-[400] font-sans">{selectedOption ? selectedOption.label : '- ' + label + ' -' }</Text>
+            </Pressable>
+
+            {
+                dropdownVisible && (
+                    <View className="absolute rounded-bl-[5px] rounded-br-[5px] border-gray-50 top-full right-0 left-0 w-full bg-white p-5 z-[999]" style={{ gap: '12px' }}>
+                        {options.map((option) => (
+                            <TouchableOpacity
+                                key={option.value}
+                                onPress={() => handleSelectOption(option)}
+                                className="py-2"
+                            >
+                                <Text className="text-[14px] font-sans text-gray-400">{option.label}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                )
+            }
+
+            <Pressable
+                className="absolute inset-y-0 right-0 flex flex-row items-center p-[14px] text-secondary"
+                onPress={() => setDropdownVisible(!dropdownVisible)} >
+                <View>
+                    {
+                        !dropdownVisible ? <FiChevronDown className='w-[20px] h-[20px]' /> : <FiChevronUp className='w-[20px] h-[20px]' />
+                    }
+                </View>
+            </Pressable>
+        </View>
+    );
+};

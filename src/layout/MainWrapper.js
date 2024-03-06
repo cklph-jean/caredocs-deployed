@@ -17,11 +17,11 @@ const SignedOutStack = createNativeStackNavigator();
 
 const SignedOutNavigator = () => {
     return <SignedOutStack.Navigator>
+        <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="choose-your-package" component={ChooseYourPackage} options={{ headerShown: false }} />
         <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
-        <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
     </SignedOutStack.Navigator>
 }
 
@@ -51,7 +51,7 @@ export default function MainWrapper() {
             documentTitle={{
                 formatter: (options, route) => `${options?.title ?? PageTitle(route?.name) ?? 'Home'} | CareDocs`,
             }}>
-            <View className="flex-1 w-full bg-[url('./src/assets/svg/bgImage.png')] bg-cover lg:px-20 overflow-y-auto">
+            <View className="z-[1] flex-1 w-full bg-[url('./src/assets/svg/bgImage.png')] bg-cover overflow-y-auto">
                 <View className="w-full">
                     {
                         !isAuthenticated ? <SignedOutNavigator /> : <SignedInNavigator />

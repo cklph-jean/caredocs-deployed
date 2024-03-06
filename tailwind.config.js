@@ -31,7 +31,7 @@ module.exports = {
         'sans': ['TT Commons', 'Helvetica', 'Arial', 'sans-serif'],
         'tt-commons-bold': ['TT Commons Bold', 'sans-serif'],
         'tt-commons-medium': ['TT Commons Medium', 'sans-serif'],
-      }
+      },
     }
   },
   plugins: [nativewind()],
