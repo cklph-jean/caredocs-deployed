@@ -18,12 +18,14 @@ import { FiEyeOff, FiEye } from "react-icons/fi";
 export default function CreateAccount({ navigation }) {
 
   const [isPasswordOpen, setIsPasswordOpen] = useToggle(false);
+  const [isConfirmPasswordOpen, setIsConfirmPasswordOpen] = useToggle(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isFailedLogin, setIsFailedLogin] = useState(false);
 
   const handleChange = (setState) => (event) => {
@@ -38,10 +40,15 @@ export default function CreateAccount({ navigation }) {
     setIsFailedLogin(true);
   }
 
-  let icon = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
+  let iconPassword = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
+  let iconConfirmPassword = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
 
   if (isPasswordOpen) {
-    icon = <FiEye className="text-[#828282] w-[20px] h-[20px] p-0" />
+    iconPassword = <FiEye className="text-[#828282] w-[20px] h-[20px] p-0" />
+  }
+
+  if (isConfirmPasswordOpen) {
+    iconConfirmPassword = <FiEye className="text-[#828282] w-[20px] h-[20px] p-0" />
   }
 
   return (
@@ -167,16 +174,16 @@ export default function CreateAccount({ navigation }) {
                   value={password}
                   onChange={handleChange(setPassword)}
                   secureTextEntry={!isPasswordOpen ? true : false}
-                  icon={<Button className="p-0" onPress={setIsPasswordOpen}>{icon}</Button>}
+                  icon={<Button className="p-0" onPress={setIsPasswordOpen}>{iconPassword}</Button>}
                 />
 
                 <InputField
                   label="Confirmation password"
                   placeholder="Input password here"
-                  value={password}
-                  onChange={handleChange(setPassword)}
-                  secureTextEntry={!isPasswordOpen ? true : false}
-                  icon={<Button className="p-0" onPress={setIsPasswordOpen}>{icon}</Button>}
+                  value={confirmPassword}
+                  onChange={handleChange(setConfirmPassword)}
+                  secureTextEntry={!isConfirmPasswordOpen ? true : false}
+                  icon={<Button className="p-0" onPress={setIsConfirmPasswordOpen}>{iconConfirmPassword}</Button>}
                 />
 
               </View>
