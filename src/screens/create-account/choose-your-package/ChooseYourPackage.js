@@ -241,10 +241,8 @@ export default function ChooseYourPackage({ navigation }) {
                 <View className="flex flex-row justify-center">
                     <Image
                         source={LogoImage}
-                        width={'169px'}
-                        height={'40px'}
                         alt={'CareDocs Logo'}
-                        className="w-[100px] h-[100px]"
+                        className="w-[169px] h-[40px]"
                     />
                 </View>
                 {/* End of Logo */}

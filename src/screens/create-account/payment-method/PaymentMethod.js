@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import CardDetailsInput from "../../../components/CardDetailsInput";
 import LogoImage from '../../../assets/svg/Logo.svg';
@@ -8,14 +8,13 @@ import DropdownSelect from "../../../components/DropdownSelect";
 import Link from "../../../components/Link";
 import Button from "../../../components/Button";
 import Lock from "../../../assets/svg/Lock.svg"
-
-
+import BillingAddress from "../../../components/BillingAddress";
+import CountriesDropdownSelect from "../../../components/CountriesDropdownSelect";
 
 export default function PaymentMethod() {
     const [nameOnCard, setNameOnCard] = useState('');
     const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [cities, setCities] = useState('');
 
     const handleChange = (setState) => (event) => {
         setState(event.target.value)
@@ -29,42 +28,42 @@ export default function PaymentMethod() {
         console.log(cardDetails);
     }
 
-    // TODO use third party api for list of countries with list of cities.
-    const countries = [
-        { label: 'Philippines', value: 'PH' },
-        { label: 'United State of America', value: 'USA' },
-        { label: 'Japan', value: 'JPY' },
-    ];
+    const handleBillingAddressValues = (billingAddressDetails) => {
+        console.log(billingAddressDetails)
+    }
 
-    const cities = [
+    const handleSelectCountry = (option) => {
+        setCountry(option.value);
+
+
+        const optionCities = option.cities.map((city) => {
+            return { label: city, value: city };
+        });
+
+        setCities(optionCities)
+    };
+
+    const cities_1 = [
         { label: 'Manila', value: 'MNL' },
         { label: 'Cebu', value: 'CEB' },
         { label: 'Davao', value: 'DAV' },
     ]
 
-    const handleSelectCountry = (option) => {
-        setCountry(option);
-    };
-
-    const handleSelectCity = (option) => {
-        setCity(option);
-    };
 
     return (
         <View className="items-center min-h-screen justify-center font-sans">
-            <View className="flex flex-col py-10 lg:py-0 xl:flex-row lg:flex-wrap w-full items-center" style={{gap:'32px'}}>
+            <View className="flex flex-col py-10 lg:py-0 lg:flex-row lg:flex-wrap w-full items-center">
                 {/* Left Area */}
-                <View className="lg:flex items-center lg:w-1/2" style={{ gap: '32px' }}>
+                <View className="lg:flex items-center lg:w-1/2 pb-[32px]" style={{ gap: '32px' }}>
                     <View className="w-[356px]" style={{ gap: '24px' }}>
+
                         <View style={{ gap: '32px' }}>
                             {/* Logo */}
                             <View className="flex flex-row justify-start">
                                 <Image
                                     source={LogoImage}
-                                    width={'169px'}
-                                    height={'40px'}
                                     alt={'CareDocs Logo'}
-                                    className="w-[100px] h-[100px]"
+                                    className="w-[169px] h-[40px]"
                                 />
                             </View>
                             {/* End of Logo */}
@@ -91,48 +90,19 @@ export default function PaymentMethod() {
 
                             <CardDetailsInput handleCardDetailsValue={handleCardDetailsValue} />
 
-                            <View className="relative z-[2]" style={{ gap: '4px' }}>
-                                <Text className="font-sans text-[14px] text-secondary">
-                                    Country
-                                </Text>
+                            <CountriesDropdownSelect handleSelectCountry={handleSelectCountry} />
 
-                                <DropdownSelect
-                                    label="Select Country"
-                                    options={countries}
-                                    onSelect={handleSelectCountry} />
-                            </View>
-
-
-                            <View className="z-[1]" style={{ gap: '4px' }}>
-                                {/* TODO MAKE COMPONENT FOR BILLING ADDRESS */}
-                                <Text className="font-sans text-[14px] text-secondary">
-                                    Billing address
-                                </Text>
-
-                                <View>
-                                    <DropdownSelect
-                                        label="Select city"
-                                        options={cities}
-                                        onSelect={handleSelectCity} />
-
-                                    <InputField
-                                        className="rounded-b-[5px]"
-                                        placeholder="Enter your zip code"
-                                        value={zipCode}
-                                        onChange={handleChange(setZipCode)}
-                                        customRadius={true}
-                                    />
-                                </View>
-                            </View>
+                            <BillingAddress
+                                cities={cities}
+                                handleBillingAddressValues={handleBillingAddressValues}
+                            />
                         </View>
 
-                        <View>
-                            <Text className="font-sans">
-                                By click payment, you agree to CareDocs <Link className="text-purple" text="Terms of Use" /> and <Link className="text-purple" text="Privacy policy" />. This subscription automatically renews monthly, and you’ll be notified if the above amount increases.
-                            </Text>
-                        </View>
+                        <Text className="font-sans -z-10">
+                            By click payment, you agree to CareDocs <Link className="text-purple" text="Terms of Use" /> and <Link className="text-purple" text="Privacy policy" />. This subscription automatically renews monthly, and you’ll be notified if the above amount increases.
+                        </Text>
 
-                        <Button textClass="font-[600] text-[14px] leading-[20px] text-white flex" primary rounded className="px-[18px] py-[12px] w-full">
+                        <Button textClass="-z-10 font-[600] text-[14px] leading-[20px] text-white flex" primary rounded className="px-[18px] py-[12px] w-full">
                             <Image source={Lock} width={20} height={20} tintColor="white" className="mr-[6px]" />
                             Pay Now
                         </Button>
@@ -170,7 +140,7 @@ export default function PaymentMethod() {
                             {/* Total Payment Due */}
                             <View className="pb-[24px]" style={{ gap: '24px' }}>
                                 <View className="flex flex-row justify-between">
-                                    <View style={{gap:'4px'}}>
+                                    <View style={{ gap: '4px' }}>
                                         <Text className="text-white text-[22px]">Total due today</Text>
                                         <Text className="text-white text-[14px]">*T&C apply</Text>
                                     </View>

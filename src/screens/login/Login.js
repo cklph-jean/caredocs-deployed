@@ -15,6 +15,7 @@ import Link from "../../components/Link";
 import useToggle from "../../hooks/useToggle";
 import StatusCard from "../../components/StatusCard";
 import Card from "../../components/Card";
+import useAuthStore from "../../store/apis/caredocs/auth";
 
 
 export default function Login({ navigation }) {
@@ -24,12 +25,15 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState('');
     const [isFailedLogin, setIsFailedLogin] = useState(false);
 
+    const { login } = useAuthStore();
+
     const handleChange = (setState) => (event) => {
         setState(event.target.value);
     };
 
-    const handleFormSubmit = () => {
-        setIsFailedLogin(true);
+    const handleFormSubmit = async () => {
+        await login({ email, password });
+        // setIsFailedLogin(true);
     }
 
     const welcomeTitle = <>
@@ -73,7 +77,7 @@ export default function Login({ navigation }) {
                         <InfoCard
                             className="lg:w-[624px]"
                             imagePosition="right"
-                            imageClass="lg:w-[214px] lg:h-[450px] lg:top-[-146px]"
+                            imageClass="lg:top-[-146px]"
                             imagePath={personImage1}
                             title={welcomeTitle}
                             description={welcomeDescription}
@@ -86,7 +90,7 @@ export default function Login({ navigation }) {
                         <InfoCard
                             className="lg:w-[732px] lg:h-[228px]"
                             imagePosition="left"
-                            imageClass="lg:w-[214px] lg:h-[450px] lg:top-[-144px] lg:right-[-110px]"
+                            imageClass="lg:top-[-170px] lg:right-[-110px]"
                             imagePath={personImage2}
                             title={findCareDocsTitle}
                             description={findCareDocsDescription}
@@ -106,10 +110,8 @@ export default function Login({ navigation }) {
                             <View className="flex flex-row mt-[32px] mb-[16px] justify-center">
                                 <Image
                                     source={LogoImage}
-                                    width={'169px'}
-                                    height={'40px'}
                                     alt={'CareDocs Logo'}
-                                    className="w-[100px] h-[100px]"
+                                    className="w-[169px] h-[40px]"
                                 />
                             </View>
                             {/* End of Logo */}
@@ -168,7 +170,7 @@ export default function Login({ navigation }) {
 
                             <View className="flex flex-col items-start" style={{ gap: '16px' }}>
                                 <Button
-                                    onPress={setIsFailedLogin}
+                                    onPress={handleFormSubmit}
                                     primary
                                     rounded
                                     textClass="text-white"

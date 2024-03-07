@@ -26,7 +26,7 @@ export default function StatusCard({
 }) {
 
     const statusCardClasses = classNames(
-        "flex flex-row items-start p-[12px] self-stretch rounded-[4px]",
+        "flex flex-row items-center p-[12px] self-stretch rounded-[4px]",
         {
             "border border-danger-500 bg-danger-50": error,
             "border border-success bg-success": success,

@@ -5,8 +5,8 @@ export const DEFAULT = {
 
 export const API_URL = {
     DEVELOPMENT: "",
-    STAGING: "",
-    PRODUCTION: "https://caredocs.onrender.com/v1"
+    STAGING: "https://caredocs.onrender.com",
+    PRODUCTION: "https://caredocs.onrender.com"
 }
 
 export const API_ENDPOINTS = {
@@ -15,3 +15,8 @@ export const API_ENDPOINTS = {
     FORGOT_PASSWORD: "/auth/forgot-password",
 }
 
+export const API_COUTNRIES = {
+    'BASE_URL': 'https://countriesnow.space/api/v0.1',
+    'ALL': '/countries',
+    'CITIES': '/cities',
+}

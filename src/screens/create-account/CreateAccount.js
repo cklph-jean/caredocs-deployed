@@ -115,10 +115,8 @@ export default function CreateAccount({ navigation }) {
               <View className="flex flex-row mt-[32px] mb-[16px] justify-center">
                 <Image
                   source={LogoImage}
-                  width={'169px'}
-                  height={'40px'}
                   alt={'CareDocs Logo'}
-                  className="w-[100px] h-[100px]"
+                  className="w-[169px] h-[40px]"
                 />
               </View>
               {/* End of Logo */}
