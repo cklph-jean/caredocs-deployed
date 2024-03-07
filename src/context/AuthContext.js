@@ -1,4 +1,4 @@
-
+// Will delete this. -> We are using Zustand; go to -> store/apis/caredocs/auth.js
 
 import { createContext, useState } from "react"
 import { axiosInstance } from "../store/apis/axios";
@@ -9,29 +9,29 @@ const AuthContext = createContext({})
 export default function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null)
+    const [token, setToken] = useState(null);
+    const [error, setError] = useState();
 
     const login = async ({ ...data }) => {
         try {
             // perform login here
-            const response = await axiosInstance.post(API_ENDPOINTS.LOGIN, data, {
+            const response = await axiosInstance.post(API_ENDPOINTS.LOGIN, {
+                user: data
+            }, {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }
             });
 
-            // check if successfully logged in 
-            let token = response.headers?.authorization;
+            console.log(response.result);
 
-            if (token) {
-                // TODO: set to async storage
-                
-                // set to state
-                setToken(token)
-            }
+            return response
 
         } catch (error) {
+
+            setError(error)
             console.error(error)
+            throw (error)
         }
 
     }

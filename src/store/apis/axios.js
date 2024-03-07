@@ -1,11 +1,11 @@
 import axios from "axios";
-import { DEFAULT } from "../../config";
+import { API_URL } from "../../config";
 
-const token = "example token"; // Token or API Key?
+const token = "";
 
 export default axios.create({
-    baseURL: DEFAULT.BASE_URL,
+    baseURL: API_URL.STAGING,
     headers : {
-        Authorization: token ? `Bearer ${token}` : null,
+        // Authorization: token ? `Bearer ${token}` : null,
     }
 });

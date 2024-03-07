@@ -1,4 +1,4 @@
-import { Pressable, TouchableOpacity, Text, Alert, TouchableHighlight } from "react-native"
+import { Text, TouchableHighlight } from "react-native"
 import className from "classnames";
 
 export default function Button({
@@ -22,7 +22,7 @@ export default function Button({
         {
             "opacity-80": loading,
             "border border-primary bg-primary text-white": primary && !outline,
-            "border border-secondary bg-secondary text-white": secondary && !outline,
+            "border border-primary bg-white text-primary px-[18px] py-[12px] rounded-[5px]": secondary,
             "border border-success bg-success text-white": success,
             "border border-warning bg-warning text-black": warning,
             "border border-danger bg-danger text-white": danger && !outline,
@@ -42,9 +42,18 @@ export default function Button({
         rest.className
     );
 
+    const textClasses = className(
+        "flex items-center",
+        {
+            "text-primary font-[600] text-[14px]" : secondary,
+            "text-white" : primary,
+        },
+        rest.textClass
+    )
+
     return (
         <TouchableHighlight {...rest} className={classes}>
-            <Text className={textClass || 'text-white'}>{children}</Text>
+            <Text className={textClasses}>{children}</Text>
         </TouchableHighlight>
     )
 }

@@ -3,6 +3,7 @@ const nativewind = require("nativewind/tailwind/native")
 
 module.exports = {
   content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
+  important: true,
   theme: {
     extend: {
       colors: {
@@ -31,7 +32,7 @@ module.exports = {
         'sans': ['TT Commons', 'Helvetica', 'Arial', 'sans-serif'],
         'tt-commons-bold': ['TT Commons Bold', 'sans-serif'],
         'tt-commons-medium': ['TT Commons Medium', 'sans-serif'],
-      }
+      },
     }
   },
   plugins: [nativewind()],

@@ -26,7 +26,8 @@
     "react-native": "0.73.4",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-svg": "^12.1.1",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

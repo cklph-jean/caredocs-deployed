@@ -23,7 +23,7 @@ export default function Tabs({ tabs, children }) {
         buttonTextClasses = className(
             "text-black font-sans",
             {
-                "font-tt-commons-medium font-[600]": index == activeTab
+                "font-tt-commons-medium font-[600]": index == activeTab,
             }
         )
 

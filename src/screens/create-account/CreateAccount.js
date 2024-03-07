@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Image, Text, View } from "react-native";
 import InfoCard from "../../components/InfoCard";
-import SignupImage1 from '../../assets/svg/signup/SignupImage1.png';
-import SignupImage2 from '../../assets/svg/signup/SignupImage2.png';
+import SignupImage1 from '../../assets/images/signup/SignupImage1.png';
+import SignupImage2 from '../../assets/images/signup/SignupImage2.png';
 import Frame from '../../assets/svg/signup/Frame.svg'
 import BigText from "../../components/BigText";
 import LogoImage from '../../assets/svg/Logo.svg';
 import Card from "../../components/Card";
 import useToggle from "../../hooks/useToggle";
 import InputField from "../../components/InputField";
-import StatusCard from "../../components/StatusCard";
 import Link from "../../components/Link";
 import Button from "../../components/Button";
 import { FiEyeOff, FiEye } from "react-icons/fi";
@@ -52,7 +51,7 @@ export default function CreateAccount({ navigation }) {
   }
 
   return (
-    <View className="items-center lg:px-5 py-[20px] min-h-screen justify-center font-sans">
+    <View className="items-center py-[20px] lg:px-20 min-h-screen justify-center font-sans">
 
       <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
 
@@ -116,10 +115,8 @@ export default function CreateAccount({ navigation }) {
               <View className="flex flex-row mt-[32px] mb-[16px] justify-center">
                 <Image
                   source={LogoImage}
-                  width={'169px'}
-                  height={'40px'}
                   alt={'CareDocs Logo'}
-                  className="w-[100px] h-[100px]"
+                  className="w-[169px] h-[40px]"
                 />
               </View>
               {/* End of Logo */}
