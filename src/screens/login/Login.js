@@ -32,6 +32,9 @@ export default function Login({ navigation }) {
     };
 
     const handleFormSubmit = async () => {
+
+        return; // WIP
+
         await login({ email, password });
         // setIsFailedLogin(true);
     }
