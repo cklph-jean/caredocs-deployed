@@ -43,9 +43,10 @@ export default function Button({
     );
 
     const textClasses = className(
-        "text-white flex items-center",
+        "flex items-center",
         {
-            "text-primary font-[600] text-[14px]" : secondary
+            "text-primary font-[600] text-[14px]" : secondary,
+            "text-white" : primary,
         },
         rest.textClass
     )
