@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 
 import { Feather } from '@expo/vector-icons';
@@ -25,18 +25,24 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState('');
     const [isFailedLogin, setIsFailedLogin] = useState(false);
 
-    const { login } = useAuthStore();
+    const { user, error, login } = useAuthStore();
+
+    useEffect(() => {
+        if (error) {
+            setIsFailedLogin(true)
+        }
+
+        if (!isFailedLogin && user) {
+            navigation.navigate('dashboard'); // TODO: Change to appropriate link
+        }
+    }, [error, isFailedLogin, user])
 
     const handleChange = (setState) => (event) => {
         setState(event.target.value);
     };
 
     const handleFormSubmit = async () => {
-
-        return; // WIP
-
         await login({ email, password });
-        // setIsFailedLogin(true);
     }
 
     const welcomeTitle = <>

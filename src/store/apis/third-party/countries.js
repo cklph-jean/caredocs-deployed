@@ -7,16 +7,16 @@ const BASE_URL = API_COUTNRIES.BASE_URL;
 const useCountriesStore = create((set) => ({
     countries: [],
     fetchCountries: async () => {
-        try {
-            const response = await fetch(`${BASE_URL}${API_COUTNRIES.ALL}`);
+        const COUNTRIES_API_URL = BASE_URL + API_COUTNRIES.ALL;
 
-            if (!response.ok) {
+        try {
+            const response = await axios.get( COUNTRIES_API_URL );
+
+            if (!response.data) {
                 throw new Error('Failed to fetch countries');
             }
-            const data = await response.json();
-
-            console.log(data);
-            set({ countries: data });
+            
+            set({ countries: response.data });
         } catch (error) {
             console.error(error);
         }
@@ -26,6 +26,8 @@ const useCountriesStore = create((set) => ({
 const useCitiesStore = create((set) => ({
     cities: [],
     fetchCities: async (countryName = null) => {
+        const CITIES_API_URL = BASE_URL + API_COUTNRIES.CITIES;
+
         try {
             if (countryName) { // all cities based on country
                 let data = JSON.stringify({
@@ -34,26 +36,20 @@ const useCitiesStore = create((set) => ({
                     "country": countryName
                 });
 
-                let config = {
-                    method: 'post',
-                    maxBodyLength: Infinity,
-                    url: `${BASE_URL}${API_COUTNRIES.CITIES}/`,
+                axios.post(CITIES_API_URL, data, {
                     headers: {
                         'Content-Type': 'application/json'
-                    },
-                    data: data
-                };
-
-                axios.request(config)
+                    }
+                })
                     .then((response) => {
-                        set({ cities: JSON.stringify(response.data) })
+                        set({ cities: JSON.stringify(response.data) });
                     })
                     .catch((error) => {
                         console.log(error);
                     });
             } else {
                 // all cities
-                const response = await fetch(`${BASE_URL}${API_COUTNRIES.CITIES}`);
+                const response = await fetch(CITIES_API_URL);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch cities');
