@@ -12,6 +12,8 @@ import InputField from "../../components/InputField";
 import Link from "../../components/Link";
 import Button from "../../components/Button";
 import { FiEyeOff, FiEye } from "react-icons/fi";
+import useAuthStore from "../../store/apis/caredocs/auth";
+import { useEffect } from "react";
 
 
 export default function CreateAccount({ navigation }) {
@@ -19,24 +21,47 @@ export default function CreateAccount({ navigation }) {
   const [isPasswordOpen, setIsPasswordOpen] = useToggle(false);
   const [isConfirmPasswordOpen, setIsConfirmPasswordOpen] = useToggle(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isFailedLogin, setIsFailedLogin] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [countryCode, setCountryCode] = useState('+63');
+  const [signUpError, setSignUpError] = useState(null);
+
+  const { user, error, register } = useAuthStore();
+
+  useEffect(() => {
+
+    if (error) {
+      setSignUpError(error)
+    }
+
+    if (user && !signUpError) {
+      navigation.navigate('payment-method')
+    }
+    
+  }, [user, error, signUpError])
 
   const handleChange = (setState) => (event) => {
     setState(event.target.value);
   };
 
   const handleChangeCountryCode = (code) => {
-    console.log(code);
+    setCountryCode(code)
   }
 
-  const handleFormSubmit = () => {
-    setIsFailedLogin(true);
+  const handleFormSubmit = async () => {
+
+    const signUpData = {
+      "firstname": firstName,
+      "lastname": lastName,
+      "email": email,
+      "password": password
+    };
+
+    await register(signUpData);
   }
 
   let iconPassword = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
@@ -187,7 +212,7 @@ export default function CreateAccount({ navigation }) {
 
               <View className="flex flex-col items-start" style={{ gap: '16px' }}>
                 <Button
-                  onPress={() => navigation.navigate('payment-method')}
+                  onPress={handleFormSubmit}
                   primary
                   rounded
                   textClass="text-white"

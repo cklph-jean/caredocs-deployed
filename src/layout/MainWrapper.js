@@ -12,21 +12,33 @@ import ChooseYourPackage from '../screens/create-account/choose-your-package';
 import PaymentMethod from '../screens/create-account/payment-method';
 // End of Signed Out Stacks
 
+// Signed In Stacks
+import Dashboard from '../screens/dashboard';
+import useAuthStore from '../store/apis/caredocs/auth';
+
+// End of Signed In Stacks
+
 const SignedInStack = createNativeStackNavigator();
 const SignedOutStack = createNativeStackNavigator();
 
 const SignedOutNavigator = () => {
-    return <SignedOutStack.Navigator>
-        <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
-        <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
-        <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
-        <SignedOutStack.Screen name="choose-your-package" component={ChooseYourPackage} options={{ headerShown: false }} />
-        <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
-    </SignedOutStack.Navigator>
+    return (
+        <SignedOutStack.Navigator>
+            <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
+            <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
+            <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
+            <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
+            <SignedOutStack.Screen name="choose-your-package" component={ChooseYourPackage} options={{ headerShown: false }} />
+        </SignedOutStack.Navigator>
+    )
 }
 
 const SignedInNavigator = () => {
-    return <SignedInStack.Navigator></SignedInStack.Navigator>
+    return (
+        <SignedInStack.Navigator>
+            <SignedOutStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
+        </SignedInStack.Navigator>
+    )
 }
 
 
@@ -43,7 +55,8 @@ const navigationConfig = {
 };
 
 export default function MainWrapper() {
-    const [isAuthenticated, setisAuthenticated] = useState(false);
+    const { isAuthenticated } = useAuthStore();
+
 
     return (
         <NavigationContainer
