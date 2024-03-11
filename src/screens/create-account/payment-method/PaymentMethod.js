@@ -10,18 +10,51 @@ import Button from "../../../components/Button";
 import Lock from "../../../assets/svg/Lock.svg"
 import BillingAddress from "../../../components/BillingAddress";
 import CountriesDropdownSelect from "../../../components/CountriesDropdownSelect";
+import { retrieveData } from "../../../utils/asyncStorage";
+import useAuthStore from "../../../store/apis/caredocs/auth";
+import PopupModal from "../../../components/PopUpModal";
+import ResendEmailCountdown from "../../../components/ResendEmailCountdown";
+import useCountdownStore from "../../../store/apis/caredocs/countDownStore";
 
 export default function PaymentMethod() {
     const [nameOnCard, setNameOnCard] = useState('');
     const [country, setCountry] = useState('');
     const [cities, setCities] = useState('');
+    const [signUpError, setSignUpError] = useState(null);
+    const [email, setEmail] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [isResent, setIsResent] = useState(false);
+
+    const { user, error, register } = useAuthStore();
+    const { isResendEnabled, resetCountdown } = useCountdownStore();
+
+    useEffect(() => {
+
+        if (error) {
+            setSignUpError(error)
+        }
+
+        if (user && !signUpError) {
+            // navigation.navigate('payment-method')
+        }
+
+    }, [user, error, signUpError])
 
     const handleChange = (setState) => (event) => {
         setState(event.target.value)
     }
 
-    const handlePaymentMethodFormSubmit = () => {
-        console.log('Submitted');
+    const handlePaymentMethodFormSubmit = async () => {
+        const result = await retrieveData('signUpData');
+        const signUpData = JSON.parse(result);
+
+        await register(signUpData);
+
+        setEmail(signUpData.email);
+        handleShow(); // show modal
+
+        // removeData('signUpData');
+        // navigation.navigate('login');
     }
 
     const handleCardDetailsValue = (cardDetails) => {
@@ -43,12 +76,60 @@ export default function PaymentMethod() {
         setCities(optionCities)
     };
 
-    const cities_1 = [
-        { label: 'Manila', value: 'MNL' },
-        { label: 'Cebu', value: 'CEB' },
-        { label: 'Davao', value: 'DAV' },
-    ]
+    const handleShow = () => {
+        setShowModal(true);
+    };
 
+    const handleClose = () => {
+        setShowModal(false);
+    };
+
+    const handleResendEmail = () => {
+        setIsResent(true)
+        resetCountdown();
+    }
+
+    const handleBackToLogin = () => {
+        navigation.navigate('login');
+    }
+
+    const actionBar = (
+        <View className="flex" style={{ gap: '11px' }}>
+
+            {!isResendEnabled && <ResendEmailCountdown reSent={isResent} />}
+
+            {
+                !isResent &&
+                (
+                    <Button
+                        primary
+                        disabled={!isResendEnabled}
+                        onPress={handleResendEmail} >
+                        Resend email
+                    </Button>
+                )
+            }
+
+            <Button onPress={handleBackToLogin} secondary rounded>
+                Back to Login
+            </Button>
+        </View>
+    );
+
+    const modal = (
+        <PopupModal onClose={handleClose} actionBar={actionBar} className="w-[344px] px-[16px] pb-[16px]">
+            <View className="py-[48px]" style={{ gap: "8px" }}>
+                <Text className="font-tt-commons-medium font-[600] text-[18px] text-black">
+                    Check your email inbox
+                </Text>
+
+                <Text className="font-sans text-[14px]">
+                    We sent a link to <Text className="font-[800]">{email}</Text>. If you don’t see it, check your spam folder. After confirming your email, you can explore the platform.
+                </Text>
+            </View>
+
+        </PopupModal>
+    );
 
     return (
         <View className="items-center min-h-screen justify-center font-sans">
@@ -85,6 +166,7 @@ export default function PaymentMethod() {
                                     label="Name on card"
                                     placeholder="Input your name on card"
                                     value={nameOnCard}
+                                    onChange={handleChange(setNameOnCard)}
                                 />
                             </View>
 
@@ -102,10 +184,20 @@ export default function PaymentMethod() {
                             By click payment, you agree to CareDocs <Link className="text-purple" text="Terms of Use" /> and <Link className="text-purple" text="Privacy policy" />. This subscription automatically renews monthly, and you’ll be notified if the above amount increases.
                         </Text>
 
-                        <Button textClass="-z-10 font-[600] text-[14px] leading-[20px] text-white flex" primary rounded className="px-[18px] py-[12px] w-full">
+                        <Button
+                            textClass="-z-10 font-[600] text-[14px] leading-[20px] text-white flex"
+                            className="px-[18px] py-[12px] w-full"
+                            primary
+                            rounded
+                            onPress={handlePaymentMethodFormSubmit}
+                        >
                             <Image source={Lock} width={20} height={20} tintColor="white" className="mr-[6px]" />
                             Pay Now
                         </Button>
+
+                        <View>
+                            {showModal && modal}
+                        </View>
                     </View>
                 </View>
                 {/* End of Left Area */}

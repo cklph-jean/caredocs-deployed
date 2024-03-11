@@ -9,7 +9,10 @@ module.exports = {
       colors: {
         'primary': '#26C8B8',
         'secondary': '#828282',
-        'success': '#5cb85c',
+        'success': {
+          '400': '#5cb85c',
+          '500': '#10B981'
+        },
         'danger': {
           50: '#FDE8E8',
           100: '',
@@ -24,7 +27,8 @@ module.exports = {
         'gray': {
           50: '#E6E6E6',
           100: '#040201',
-          400: '#A0A0A0'
+          400: '#A0A0A0',
+          500: '#4D4D4D'
         }
       },
 

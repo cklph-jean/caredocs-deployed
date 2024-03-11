@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { TouchableOpacity, Linking, Text } from 'react-native';
+import { Linking, Text, Pressable } from 'react-native';
 
 export default function Link ({ url, navigation, screenName, text, ...rest }) {
   const handlePress = () => {
@@ -16,8 +16,8 @@ export default function Link ({ url, navigation, screenName, text, ...rest }) {
   )
 
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <Pressable onPress={handlePress}>
       <Text {...rest} className={linkClasses}>{text}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };

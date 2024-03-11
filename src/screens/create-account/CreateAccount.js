@@ -12,8 +12,7 @@ import InputField from "../../components/InputField";
 import Link from "../../components/Link";
 import Button from "../../components/Button";
 import { FiEyeOff, FiEye } from "react-icons/fi";
-import useAuthStore from "../../store/apis/caredocs/auth";
-import { useEffect } from "react";
+import { storeData } from "../../utils/asyncStorage";
 
 
 export default function CreateAccount({ navigation }) {
@@ -28,21 +27,6 @@ export default function CreateAccount({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+63');
-  const [signUpError, setSignUpError] = useState(null);
-
-  const { user, error, register } = useAuthStore();
-
-  useEffect(() => {
-
-    if (error) {
-      setSignUpError(error)
-    }
-
-    if (user && !signUpError) {
-      navigation.navigate('payment-method')
-    }
-    
-  }, [user, error, signUpError])
 
   const handleChange = (setState) => (event) => {
     setState(event.target.value);
@@ -58,10 +42,17 @@ export default function CreateAccount({ navigation }) {
       "firstname": firstName,
       "lastname": lastName,
       "email": email,
-      "password": password
+      "password": password,
+      "confirm_password": confirmPassword,
+      "phone_number" : phoneNumber,
+      "country_code": countryCode
     };
 
-    await register(signUpData);
+
+    storeData( "signUpData", JSON.stringify(signUpData) ) // stored on localStorage in the meantime
+    // TODO: Keep data secured...
+
+    navigation.navigate('payment-method');
   }
 
   let iconPassword = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
