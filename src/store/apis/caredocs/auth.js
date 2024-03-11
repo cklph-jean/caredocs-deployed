@@ -2,7 +2,7 @@
 import { create } from 'zustand';
 import axiosInstance from "../axios";
 import { API_ENDPOINTS } from "../../../config";
-import { storeData } from '../../../utils/asyncStorage';
+import { removeData, storeData } from '../../../utils/asyncStorage';
 
 const useAuthStore = create((set) => ({
     user: null,
@@ -61,7 +61,10 @@ const useAuthStore = create((set) => ({
         console.log(data);
     },
 
-    logout: () => set({ user: null })
+    logout: async () => {
+        removeData('token')
+        set({ user: null });
+    }
 }));
 
 export default useAuthStore;

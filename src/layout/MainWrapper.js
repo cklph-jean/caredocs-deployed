@@ -15,6 +15,7 @@ import PaymentMethod from '../screens/create-account/payment-method';
 // Signed In Stacks
 import Dashboard from '../screens/dashboard';
 import useAuthStore from '../store/apis/caredocs/auth';
+import { retrieveData } from '../utils/asyncStorage';
 
 // End of Signed In Stacks
 
@@ -25,8 +26,8 @@ const SignedOutNavigator = () => {
     return (
         <SignedOutStack.Navigator>
             <SignedOutStack.Screen name="login" component={Login} options={{ headerShown: false }} />
-            <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
             <SignedOutStack.Screen name="payment-method" component={PaymentMethod} options={{ headerShown: false }} />
+            <SignedOutStack.Screen name="create-account" component={CreateAccount} options={{ headerShown: false }} />
             <SignedOutStack.Screen name="forgot-password" component={ForgotPassword} options={{ headerShown: false }} />
             <SignedOutStack.Screen name="choose-your-package" component={ChooseYourPackage} options={{ headerShown: false }} />
         </SignedOutStack.Navigator>
@@ -57,6 +58,8 @@ const navigationConfig = {
 export default function MainWrapper() {
     const { isAuthenticated } = useAuthStore();
 
+    // const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
+    const isLoggedIn = ( isAuthenticated ) ? true : false;
 
     return (
         <NavigationContainer
@@ -67,7 +70,7 @@ export default function MainWrapper() {
             <View className="z-[1] flex-1 w-full bg-[url('./src/assets/svg/bgImage.png')] bg-cover overflow-y-auto">
                 <View className="w-full">
                     {
-                        !isAuthenticated ? <SignedOutNavigator /> : <SignedInNavigator />
+                        !isLoggedIn ? <SignedOutNavigator /> : <SignedInNavigator />
                     }
 
                 </View>

@@ -1,4 +1,4 @@
-import { Text, TouchableHighlight } from "react-native"
+import { Pressable, Text } from "react-native"
 import className from "classnames";
 
 export default function Button({
@@ -15,13 +15,15 @@ export default function Button({
     hover,
     circle,
     textClass,
+    disabled,
     ...rest
 }) {
+
     const classes = className(
         "font-sans font-normal flex items-center transition duration-500 ease-in-out justify-center",
         {
             "opacity-80": loading,
-            "border border-primary bg-primary text-white": primary && !outline,
+            "border border-primary bg-primary text-white px-[18px] py-[12px] rounded-[5px]": primary && !outline,
             "border border-primary bg-white text-primary px-[18px] py-[12px] rounded-[5px]": secondary,
             "border border-success bg-success text-white": success,
             "border border-warning bg-warning text-black": warning,
@@ -29,6 +31,7 @@ export default function Button({
             "border border-white bg-white text-black": white,
             "rounded": rounded,
             "rounded-full": circle,
+            "border-primary/10 bg-primary/10": disabled,
             "": outline,
             "": outline && primary,
             "": outline && primary && hover,
@@ -45,15 +48,16 @@ export default function Button({
     const textClasses = className(
         "flex items-center",
         {
-            "text-primary font-[600] text-[14px]" : secondary,
-            "text-white" : primary,
+            "text-primary font-[600] text-[14px]": secondary,
+            "text-white": primary && !disabled,
+            "text-gray-400": disabled
         },
         rest.textClass
     )
 
     return (
-        <TouchableHighlight {...rest} className={classes}>
+        <Pressable {...rest} className={classes}>
             <Text className={textClasses}>{children}</Text>
-        </TouchableHighlight>
+        </Pressable>
     )
 }

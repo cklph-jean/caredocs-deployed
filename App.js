@@ -1,3 +1,4 @@
+import { View } from 'react-native';
 import './index.css';
 import AuthProvider from './src/context/AuthContext';
 import MainWrapper from './src/layout/MainWrapper';
@@ -8,6 +9,8 @@ export default function App() {
     // <View className="flex-1 justify-center overflow-auto">
     <AuthProvider>
       <MainWrapper />
+
+      <View className="modal-container z-[1]"></View>
     </AuthProvider>
     // </View>
   )
