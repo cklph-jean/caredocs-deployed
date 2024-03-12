@@ -25,11 +25,20 @@
     font-style: normal;
 }
 
-html {
-    font-family: 'TT Commons', Helvetica, Arial, sans-serif;
+* {
+    font-family: 'TT Commons', Helvetica, Arial, sans-serif !important;
     color: #4D4D4D;
 }
 
 .custom-shadow {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-bottom {
+    box-shadow: 0px -4px 14px 0px rgba(0, 0, 0, 0.12);
+}
+
+
+.custom-shadow-md {
+    @apply shadow-bottom;
 }

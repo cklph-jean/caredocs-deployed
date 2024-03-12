@@ -44,13 +44,12 @@ const SignedInNavigator = () => {
 
 
 const navigationConfig = {
-    prefixes: ['https://caredocs.com', 'caredocs://'],
+    prefixes: ['http://localhost:8081', 'localhost:8081'],
     config: {
         screens: {
-            Home: '',
             Login: 'login',
-            ForgotPassword: "forgot-password",
-            CreateAccount: "create-account"
+            ForgotPassword: 'forgot-password',
+            CreateAccount: 'create-account',
         },
     },
 };
@@ -58,8 +57,7 @@ const navigationConfig = {
 export default function MainWrapper() {
     const { isAuthenticated } = useAuthStore();
 
-    // const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
-    const isLoggedIn = ( isAuthenticated ) ? true : false;
+    const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
 
     return (
         <NavigationContainer
