@@ -24,12 +24,14 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isFailedLogin, setIsFailedLogin] = useState(false);
+    const [isLoginDisabled, setIsLoginDisabled] = useState(false);
 
     const { user, error, login } = useAuthStore();
 
     useEffect(() => {
         if (error) {
-            setIsFailedLogin(true)
+            setIsFailedLogin(true);
+            setIsLoginDisabled(false)
         }
 
         if (!isFailedLogin && user) {
@@ -42,6 +44,7 @@ export default function Login({ navigation }) {
     };
 
     const handleFormSubmit = async () => {
+        setIsLoginDisabled(true);
         await login({ email, password });
     }
 
@@ -182,6 +185,7 @@ export default function Login({ navigation }) {
                                     onPress={handleFormSubmit}
                                     primary
                                     rounded
+                                    disabled={isLoginDisabled}
                                     textClass="text-white"
                                     className="flex-none py-[12px] px-[18px]" > Login </Button>
 
