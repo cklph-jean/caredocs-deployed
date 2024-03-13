@@ -60,32 +60,38 @@ export default function SideMenu() {
             id: 1,
             icon: DashboardIcon,
             name: 'Dashboard',
+            path: 'dashboard'
         },
         {
             id: 2,
             icon: CommunicationsIcon,
             name: 'Communication',
+            path: 'communication',
             action: <Badge number={notifCount} />
         },
         {
             id: 3,
             icon: ResidentialNoteIcon,
-            name: 'Residential Notes'
+            name: 'Residential Notes',
+            path: 'residential-notes',
         },
         {
             id: 4,
             icon: ResidentsIcon,
-            name: 'Residents'
+            name: 'Residents',
+            path: 'residents',
         },
         {
             id: 5,
             icon: StaffIcon,
-            name: 'Staff'
+            name: 'Staff',
+            path: 'staff',
         },
         {
             id: 6,
             icon: FacilityIcon,
-            name: 'Facilities'
+            name: 'Facilities',
+            path: 'facilities',
         },
         {
             id: 7,
@@ -98,12 +104,13 @@ export default function SideMenu() {
 
     const renderedMenus = menus.map((menu, index) => {
 
-        const handleOnPress = () => {
+        const handleOnPress = async () => {
             if (menu.id == 7) { // check if settings
                 handleDropdownSettings()
                 setActiveMenu(0)
             } else {
-                setActiveMenu(menu.id)
+                setActiveMenu(menu.id);
+                await navigation.navigate(menu.path);
             }
         }
 
