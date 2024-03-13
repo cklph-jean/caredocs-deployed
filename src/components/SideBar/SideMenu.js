@@ -6,72 +6,115 @@ import DashboardIcon from "../../assets/svg/dashboard/DashboardIcon.svg"
 import FacilityIcon from "../../assets/svg/dashboard/FacilityIcon.svg"
 import ResidentsIcon from "../../assets/svg/dashboard/ResidentsIcon.svg"
 import StaffIcon from "../../assets/svg/dashboard/StaffIcon.svg"
+import ChevronDown from "../../assets/svg/dashboard/ChevronDown.svg"
+import ChevronUp from "../../assets/svg/dashboard/ChevronUp.svg"
+import LogoutIcon from "../../assets/svg/dashboard/Logout.svg"
+
+import Badge from "../Badge"
+import MenuButton from "./MenuButton"
+import useToggle from "../../hooks/useToggle"
 
 import { useState } from "react";
-import { Image, Pressable, Text, View } from "react-native"
+import { Image, View } from "react-native"
+
 
 export default function SideMenu() {
-    const [activeMenu, setActiveMenu] = useState(0);
+    const [activeMenu, setActiveMenu] = useState(1);
+    const [notifCount, setNotifCount] = useState(5);
+    const [isOpenDropDownSettings, handleDropdownSettings] = useToggle(false);
 
-    const iconColor = '#B693F8';
+    const accountSettingsMenu = [
+        {
+            id: 1,
+            icon: StaffIcon,
+            name: 'Edit My Profile',
+        },
+        {
+            id: 2,
+            icon: AccountSettingsIcon,
+            name: 'Account Settings',
+        },
+        {
+            id: 3,
+            icon: LogoutIcon,
+            name: 'Logout',
+        },
+    ]
+
+    const renderedAccountSettingsMenu = accountSettingsMenu.map((menu, index) => {
+        return <MenuButton
+            key={index}
+            activeMenu={activeMenu}
+            menu={menu}
+            handleOnPress={() => alert(`Should go to > ${menu.name} Page`)} />
+    })
+
+    const accountSettingsActionContent = (
+        <View className="w-full px-[12px] pt-[8px]">
+            {renderedAccountSettingsMenu}
+        </View>
+    )
 
     const menus = [
         {
             id: 1,
-            icon: <Image source={DashboardIcon} className="w-[24px] h-[24px]" tintColor={iconColor} />,
+            icon: DashboardIcon,
             name: 'Dashboard',
         },
         {
             id: 2,
-            icon: <Image source={CommunicationsIcon} className="w-[24px] h-[24px]" tintColor={'#4D4D4D'} />,
+            icon: CommunicationsIcon,
             name: 'Communication',
-            notification: ''
+            action: <Badge number={notifCount} />
         },
         {
             id: 3,
-            icon: <Image source={ResidentialNoteIcon} className="w-[24px] h-[24px]" tintColor={'#4D4D4D'} />,
+            icon: ResidentialNoteIcon,
             name: 'Residential Notes'
         },
         {
             id: 4,
-            icon: <Image source={ResidentsIcon} className="w-[24px] h-[24px]" tintColor={'#4D4D4D'} />,
+            icon: ResidentsIcon,
             name: 'Residents'
         },
         {
             id: 5,
-            icon: <Image source={StaffIcon} className="w-[24px] h-[24px]" tintColor={'#4D4D4D'} />,
+            icon: StaffIcon,
             name: 'Staff'
         },
         {
             id: 6,
-            icon: <Image source={FacilityIcon} className="w-[24px] h-[24px]" tintColor={'#4D4D4D'} />,
+            icon: FacilityIcon,
             name: 'Facilities'
         },
         {
             id: 7,
-            icon: <Image source={AccountSettingsIcon} className="w-[24px] h-[24px]" tintColor={'#4D4D4D'} />,
+            icon: AccountSettingsIcon,
             name: 'Account',
-            action: ''
+            action: <Image source={!isOpenDropDownSettings ? ChevronDown : ChevronUp} />,
+            actionContent: accountSettingsActionContent
         },
     ];
 
     const renderedMenus = menus.map((menu, index) => {
 
-        return (
-            <View className="flex py-[16px] z-[1]" key={index}>
-                <Pressable 
-                    className="rounded-[6px] flex-row items-center" 
-                    style={{ gap: '12px' }}>
+        const handleOnPress = () => {
+            if (menu.id == 7) { // check if settings
+                handleDropdownSettings()
+                setActiveMenu(0)
+            } else {
+                setActiveMenu(menu.id)
+            }
+        }
 
-                    {menu.icon}
-
-                    <Text className={`font-tt-commons-medium text-[14px] ${index == activeMenu ? 'text-purple' : ''}`}>
-                        {menu.name}
-                    </Text>
-                </Pressable>
-            </View>
-        )
+        return <MenuButton
+            key={index}
+            activeMenu={activeMenu}
+            isOpenDropDownSettings={isOpenDropDownSettings}
+            menu={menu}
+            handleOnPress={handleOnPress} />
     })
+
 
     return renderedMenus;
 }
