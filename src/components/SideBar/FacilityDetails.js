@@ -5,48 +5,43 @@ import Button from "../Button";
 import useToggle from "../../hooks/useToggle";
 import { useState } from "react";
 
+export const facilities = [
+    {
+        id: 1,
+        icon: FacilityIcon,
+        name: 'Harmonious Place'
+    },
+    {
+        id: 2,
+        icon: FacilityIcon,
+        name: 'Opportunity Haven'
+    },
+    {
+        id: 3,
+        icon: FacilityIcon,
+        name: 'Employment Empowerment Hub'
+    },
+    {
+        id: 4,
+        icon: FacilityIcon,
+        name: 'Workforce Wellness Shelter'
+    },
+    {
+        id: 5,
+        icon: FacilityIcon,
+        name: 'New Beginnings Work Hub'
+    },
+    {
+        id: 6,
+        icon: FacilityIcon,
+        name: 'Job Ready Center'
+    },
+];
+
 export default function FacilityDetails({ activeFacility = 0 }) {
 
     const [isShowFacilities, handleToggleFacilities] = useToggle(true);
     const [isActive, setIsActive] = useState(activeFacility);
-
-    const facilities = [
-        {
-            id: 1,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'Harmonious Place'
-        },
-        {
-            id: 2,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'Opportunity Haven'
-        },
-        {
-            id: 3,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'Employment Empowerment Hub'
-        },
-        {
-            id: 4,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'Workforce Wellness Shelter'
-        },
-        {
-            id: 5,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'New Beginnings Work Hub'
-        },
-        {
-            id: 6,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'Job Ready Center'
-        },
-        {
-            id: 7,
-            icon: <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />,
-            name: 'Employment Empowerment Hub'
-        },
-    ];
 
     const handleActiveFacility = (index) => {
         setIsActive(index)
@@ -60,7 +55,8 @@ export default function FacilityDetails({ activeFacility = 0 }) {
                 onPress={() => handleActiveFacility(index)}
                 style={{ gap: '6px' }}>
 
-                {item.icon}
+                <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />
+                {/* {item.icon} */}
 
                 <Text className="font-tt-commons-medium text-[12px] text-[#6EBBE2]">
                     {item.name}

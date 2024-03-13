@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
@@ -14,6 +13,14 @@ import PaymentMethod from '../screens/create-account/payment-method';
 
 // Signed In Stacks
 import Dashboard from '../screens/dashboard';
+import Communication from '../screens/communication';
+import ResidentialNotes from '../screens/residential-notes';
+import Residents from '../screens/residents';
+import Staff from '../screens/staff';
+import Facilities from '../screens/facilities';
+// End of Signed In Stacks
+
+
 import useAuthStore from '../store/apis/caredocs/auth';
 import { retrieveData } from '../utils/asyncStorage';
 
@@ -37,7 +44,12 @@ const SignedOutNavigator = () => {
 const SignedInNavigator = () => {
     return (
         <SignedInStack.Navigator>
-            <SignedOutStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="communication" component={Communication} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="residential-notes" component={ResidentialNotes} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="residents" component={Residents} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="facilities" component={Facilities} options={{ headerShown: false }} />
         </SignedInStack.Navigator>
     )
 }
@@ -50,6 +62,8 @@ const navigationConfig = {
             Login: 'login',
             ForgotPassword: 'forgot-password',
             CreateAccount: 'create-account',
+            Dashboard: 'dashboard',
+            Communication: 'communication',
         },
     },
 };

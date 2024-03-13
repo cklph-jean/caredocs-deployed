@@ -46,7 +46,7 @@ export default function Button({
     );
 
     const textClasses = className(
-        "flex items-center",
+        "flex items-center font-tt-commons-medium",
         {
             "text-primary font-[600] text-[14px]": secondary,
             "text-white": primary && !disabled,

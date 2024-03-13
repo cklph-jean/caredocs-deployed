@@ -20,7 +20,7 @@ export default function MenuButton({ menu, children, handleOnPress, ...rest }) {
 
                 {menu?.action && menu.action}
             </View>
-            
+
             {rest.isOpenDropDownSettings && menu?.actionContent && menu?.actionContent}
         </Pressable>
     )
