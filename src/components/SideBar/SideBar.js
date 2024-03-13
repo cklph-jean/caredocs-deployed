@@ -23,7 +23,7 @@ export default function SideBar() {
 
                 {/* Side Menus */}
                 <View className="w-full z-[-1]">
-                    { <SideMenu /> }
+                    {<SideMenu />}
                 </View>
             </View>
         </View>
