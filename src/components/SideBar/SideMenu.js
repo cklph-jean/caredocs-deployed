@@ -14,14 +14,23 @@ import Badge from "../Badge"
 import MenuButton from "./MenuButton"
 import useToggle from "../../hooks/useToggle"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, View } from "react-native"
+import { useRoute } from '@react-navigation/native';
+
 
 
 export default function SideMenu() {
-    const [activeMenu, setActiveMenu] = useState(1);
+
+    const route = useRoute();
+
+    const [activeMenu, setActiveMenu] = useState('');
     const [notifCount, setNotifCount] = useState(5);
     const [isOpenDropDownSettings, handleDropdownSettings] = useToggle(false);
+
+    useEffect(() => {
+        setActiveMenu(route.name);
+    }, [route, setActiveMenu]);
 
     const accountSettingsMenu = [
         {
@@ -60,38 +69,38 @@ export default function SideMenu() {
             id: 1,
             icon: DashboardIcon,
             name: 'Dashboard',
-            path: 'dashboard'
+            screenName: 'dashboard'
         },
         {
             id: 2,
             icon: CommunicationsIcon,
             name: 'Communication',
-            path: 'communication',
+            screenName: 'communication',
             action: <Badge number={notifCount} />
         },
         {
             id: 3,
             icon: ResidentialNoteIcon,
             name: 'Residential Notes',
-            path: 'residential-notes',
+            screenName: 'residential-notes',
         },
         {
             id: 4,
             icon: ResidentsIcon,
             name: 'Residents',
-            path: 'residents',
+            screenName: 'residents',
         },
         {
             id: 5,
             icon: StaffIcon,
             name: 'Staff',
-            path: 'staff',
+            screenName: 'staff',
         },
         {
             id: 6,
             icon: FacilityIcon,
             name: 'Facilities',
-            path: 'facilities',
+            screenName: 'facilities',
         },
         {
             id: 7,
@@ -105,12 +114,8 @@ export default function SideMenu() {
     const renderedMenus = menus.map((menu, index) => {
 
         const handleOnPress = async () => {
-            if (menu.id == 7) { // check if settings
+            if (menu.id == 7) { // check if account settings
                 handleDropdownSettings()
-                setActiveMenu(0)
-            } else {
-                setActiveMenu(menu.id);
-                await navigation.navigate(menu.path);
             }
         }
 
@@ -119,9 +124,13 @@ export default function SideMenu() {
             activeMenu={activeMenu}
             isOpenDropDownSettings={isOpenDropDownSettings}
             menu={menu}
-            handleOnPress={handleOnPress} />
+            handleOnPress={handleOnPress}
+            navigation={navigation}
+        />
     })
 
 
-    return renderedMenus;
+    return <>
+        {renderedMenus}
+    </>;
 }
