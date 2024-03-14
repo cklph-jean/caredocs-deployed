@@ -23,6 +23,7 @@ import Facilities from '../screens/facilities';
 
 import useAuthStore from '../store/apis/caredocs/auth';
 import { retrieveData } from '../utils/asyncStorage';
+import { useEffect, useState } from "react";
 
 // End of Signed In Stacks
 
@@ -70,8 +71,23 @@ const navigationConfig = {
 
 export default function MainWrapper() {
     const { isAuthenticated } = useAuthStore();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
+    // const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
+
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+            try {
+                const token = await retrieveData('token');
+                setIsLoggedIn(token || isAuthenticated);
+            } catch (error) {
+                // Handle error
+                console.error("Error fetching token:", error);
+            }
+        };
+
+        checkLoginStatus();
+    }, [isAuthenticated]);
 
     return (
         <NavigationContainer

@@ -4,7 +4,7 @@ import LogoImage from '../../assets/svg/Logo.svg';
 import FacilityDetails from "./FacilityDetails";
 import SideMenu from "./SideMenu";
 
-export default function SideBar() {
+export default function SideBar({ navigation }) {
 
     return (
         <View className="px-[24px] w-[242px] bg-gradient-to-br from-white/10 via-white/40 to-white/60 custom-shadow-md">
@@ -23,7 +23,7 @@ export default function SideBar() {
 
                 {/* Side Menus */}
                 <View className="w-full z-[-1]">
-                    {<SideMenu />}
+                    {<SideMenu navigation={navigation} />}
                 </View>
             </View>
         </View>
