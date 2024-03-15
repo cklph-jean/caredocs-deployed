@@ -8,6 +8,7 @@ const useAuthStore = create((set) => ({
     user: null,
     error: null,
     isAuthenticated: false,
+    setUser: (user) => set({ user: user }),
     login: async ({ ...data }) => {
         try {
 
@@ -20,7 +21,9 @@ const useAuthStore = create((set) => ({
             });
 
             // store on local storage in the meantin
-            storeData('token', response.data.result.jti);
+            await storeData('token', response.data.result.jti);
+
+            await storeData('userData', JSON.stringify(response.data))
 
             set({ isAuthenticated: true })
 
@@ -62,7 +65,9 @@ const useAuthStore = create((set) => ({
     },
 
     logout: async () => {
-        removeData('token')
+        await removeData('token')
+        await removeData('userData')
+        set({ isAuthenticated: false });
         set({ user: null });
     }
 }));

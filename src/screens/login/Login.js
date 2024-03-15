@@ -34,10 +34,7 @@ export default function Login({ navigation }) {
             setIsLoginDisabled(false)
         }
 
-        if (!isFailedLogin && user) {
-            navigation.navigate('dashboard'); // TODO: Change to appropriate link
-        }
-    }, [error, isFailedLogin, user])
+    }, [error])
 
     const handleChange = (setState) => (event) => {
         setState(event.target.value);

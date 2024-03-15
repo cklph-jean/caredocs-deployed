@@ -1,21 +1,86 @@
-import { View, Text, Image } from 'react-native'
 import WarningIcon from "../assets/svg/dashboard/facility/warning.svg";
+import { View, Text, Image } from 'react-native'
 import Button from './Button';
 import ChevronRightIcon from '../assets/svg/dashboard/ChevronRight.svg';
+import className from "classnames";
+import { Fragment } from "react";
 
+const ContentTitle = ({ icon, title, ...rest }) => {
+
+    const classess = className(
+        "text-primary lg:text-[22px] font-[600] font-tt-commons-medium leading-[28px]",
+        rest.className
+    )
+
+    return (
+        <>
+            <Image source={icon} tintColor={'#26C8B8'} />
+            <Text {...rest} className={classess}>
+                {title}
+            </Text>
+        </>
+    )
+}
 
 export default function ContentTiles({ content, ...rest }) {
+
+    let renderedHeaders, renderedRows, renderedAdditionalRows;
+
+    if (content.config) {
+        renderedHeaders = content.config.map((column) => {
+            if (column.header) {
+                return <Fragment key={column.label}>{column.header()}</Fragment>;
+            }
+
+            return (
+                <View className="table-cell text-start" key={column.label}>
+                    <Text className="font-tt-commons-medium text-[14px] font-bolder">{column.label}</Text>
+                </View>
+            )
+        });
+
+        renderedRows = content.content.map((rowData) => {
+            const renderedCells = content.config.map((column) => {
+                return !column?.additionalRow && (
+                    <View className="table-cell align-middle pt-[12px]" key={column.label}>
+                        {column.render(rowData)}
+                    </View>
+                );
+            });
+
+            return (
+                <Fragment key={content?.keyFn(rowData)}>
+                    <View className="table-row">
+                        {renderedCells}
+                    </View>
+                </Fragment>
+            )
+        });
+
+
+        renderedAdditionalRows = content.content.map((rowData, index) => {
+            return content.config.map((column, index) => {
+                if ( column.additionalRow ) {
+                    return rowData.additionalRows.map((item, index) => {
+                        const renderedCells = column.render(item);
+                        return <View className="table-row" key={index}>{renderedCells}</View>
+                    })
+                }
+            })
+        })
+
+    }
 
     return (
         <View className="custom-shadow-md p-[24px] pb-[32px] bg-white rounded-[15px]" style={{ gap: '24px' }}>
             {/* Content Title */}
-            <View className="flex-row items-center justify-between">
+            <View className="flex-wrap flex-row items-center justify-between">
                 <View className="flex-row items-center" style={{ gap: '16px' }}>
-                    {content.title}
+                    <ContentTitle icon={content.header.icon} title={content.header.title} />
                 </View>
 
                 <View className="flex-row items-center" style={{ gap: '8px' }}>
-                    <Text className="text-[14px] leading-5 font-thin">
+                    <Text className="lg:text-[14px] leading-5 font-thin">
                         See All
                     </Text>
 
@@ -28,45 +93,24 @@ export default function ContentTiles({ content, ...rest }) {
 
             {/* Content Body */}
             <View className="flex-col">
-                <View className="rounded-[15px] py-[12px] px-[24px] custom-shadow-sm bg-white">
+                <View className="rounded-[15px] px-[24px] py-[12px] custom-shadow-sm bg-white">
                     <View className="table">
                         {/* Table Header */}
                         <View className="table-row">
-                            <View className="table-cell w-[140px] text-start">
-                                <Text className="font-tt-commons-medium text-[14px] font-bolder">Post Info</Text>
-                            </View>
-
-                            <View className="table-cell">
-                                <Text className="font-tt-commons-medium text-[14px] font-bolder">Notes</Text>
-                            </View>
+                            {renderedHeaders}
                         </View>
                         {/* Table Header */}
 
                         {/* Table Body */}
-                        <View className="table-row">
-                            <View className="table-cell">
-                                <View className="py-[12px]">
-                                    <View className="flex-row w-full" style={{ gap: '10px' }}>
-                                        <Text>10/02/2023</Text>
-                                        <Text className="font-sans">10:11PM</Text>
-                                    </View>
 
-                                    <Text className="text-purple text-[14px] font-tt-commons-medium font-bold leading-5">
-                                        Regarding
-                                    </Text>
-
-                                    <Text className="text-black text-[14px] font-tt-commons-medium font-bold leading-5">
-                                        Williams Michael
-                                    </Text>
-                                </View>
-                            </View>
-                            <View className="table-cell">
-                                <Text>
-                                    Michael got tripped and for a week he needs to take a medication 2x a day to reduce his pain.
-                                </Text>
-                            </View>
+                        <View className="table-row-group">
+                            {renderedRows}
                         </View>
+                        {/* Table Body */}
+                    </View>
 
+                    <View className="table">
+                        {renderedAdditionalRows}
                     </View>
                 </View>
             </View>

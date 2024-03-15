@@ -39,19 +39,23 @@ export const facilities = [
     }
 ];
 
+const findFacilityNameById = (id) => {
+    const facility = facilities.find(facility => facility.id === id);
+    return facility ? facility.name : null;
+}
+
 export default function FacilityDetails(
     // { activeFacility = 0 }
 ) {
 
     const [isShowFacilities, handleToggleFacilities] = useToggle(true);
-    // const [isActive, setIsActive] = useState(activeFacility);
-
     const { activeFacility, setActiveFacility } = useFacilityStore();
 
 
-    const handleActiveFacility = (facilityId) => {
+    const handleActiveFacility = (facilityId, facilityName) => {
         // setIsActive(facilityId);
-        setActiveFacility(facilityId)
+        setActiveFacility(facilityId, facilityName)
+        handleToggleFacilities();
     }
 
     const renderedFacilities = facilities.map((item, index) => {
@@ -59,7 +63,7 @@ export default function FacilityDetails(
             <Pressable
                 key={index}
                 className={`p-[8px] ${activeFacility == item.id ? 'bg-secondary-ocean' : ''} rounded-[6px] flex-row items-center`}
-                onPress={() => handleActiveFacility(item.id)}
+                onPress={() => handleActiveFacility(item.id, item.name)}
                 style={{ gap: '6px' }}>
 
                 <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />
@@ -82,7 +86,9 @@ export default function FacilityDetails(
 
                 <View style={{ gap: '8px' }}>
                     <Text className="leading-[20px] font-tt-commons-medium text-[14px]">
-                        Harmonious Place
+                        {
+                            findFacilityNameById(activeFacility)
+                        }
                     </Text>
 
 
