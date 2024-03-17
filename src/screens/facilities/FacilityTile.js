@@ -40,14 +40,6 @@ export default function FacilityTile({ facility }) {
         ) : (
           <View></View>
         )}
-        {/* <Image source={Person1} className="w-[40px] h-[40px]" />
-        <Image source={Person1} className="w-[40px] h-[40px]" />
-        <Image source={Person1} className="w-[40px] h-[40px]" />
-        <Image source={Person1} className="w-[40px] h-[40px]" />
-        <Image source={Person1} className="w-[40px] h-[40px]" />
-        <Text className="w-[40px] h-[40px] border border-violet-300 text-violet-300 font-[16px] rounded-[6px] justify-center flex items-center">
-          +9
-        </Text> */}
       </View>
     </View>
   );
