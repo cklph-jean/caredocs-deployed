@@ -70,7 +70,7 @@ const navigationConfig = {
 };
 
 export default function MainWrapper() {
-    const { isAuthenticated } = useAuthStore();
+    const { isAuthenticated, setUser } = useAuthStore();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
@@ -80,6 +80,12 @@ export default function MainWrapper() {
             try {
                 const token = await retrieveData('token');
                 setIsLoggedIn(token || isAuthenticated);
+
+                if ( token ) {
+                    const userData = await retrieveData('userData');
+
+                    setUser(JSON.parse(userData))
+                }
             } catch (error) {
                 // Handle error
                 console.error("Error fetching token:", error);
@@ -87,7 +93,7 @@ export default function MainWrapper() {
         };
 
         checkLoginStatus();
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isLoggedIn]);
 
     return (
         <NavigationContainer

@@ -4,6 +4,7 @@ import { View, Image, Text, Pressable } from "react-native";
 import Button from "../Button";
 import useToggle from "../../hooks/useToggle";
 import { useState } from "react";
+import useFacilityStore from "../../store/apis/caredocs/facility/facilityStore";
 
 export const facilities = [
     {
@@ -35,24 +36,34 @@ export const facilities = [
         id: 6,
         icon: FacilityIcon,
         name: 'Job Ready Center'
-    },
+    }
 ];
 
-export default function FacilityDetails({ activeFacility = 0 }) {
+const findFacilityNameById = (id) => {
+    const facility = facilities.find(facility => facility.id === id);
+    return facility ? facility.name : null;
+}
+
+export default function FacilityDetails(
+    // { activeFacility = 0 }
+) {
 
     const [isShowFacilities, handleToggleFacilities] = useToggle(true);
-    const [isActive, setIsActive] = useState(activeFacility);
+    const { activeFacility, setActiveFacility } = useFacilityStore();
 
-    const handleActiveFacility = (index) => {
-        setIsActive(index)
+
+    const handleActiveFacility = (facilityId, facilityName) => {
+        // setIsActive(facilityId);
+        setActiveFacility(facilityId, facilityName)
+        handleToggleFacilities();
     }
 
     const renderedFacilities = facilities.map((item, index) => {
         return (
             <Pressable
                 key={index}
-                className={`p-[8px] ${index == isActive ? 'bg-secondary-ocean' : ''} rounded-[6px] flex-row items-center`}
-                onPress={() => handleActiveFacility(index)}
+                className={`p-[8px] ${activeFacility == item.id ? 'bg-secondary-ocean' : ''} rounded-[6px] flex-row items-center`}
+                onPress={() => handleActiveFacility(item.id, item.name)}
                 style={{ gap: '6px' }}>
 
                 <Image source={FacilityIcon} tintColor="#6EBBE2" className="w-[16px] h-[16px]" />
@@ -75,7 +86,9 @@ export default function FacilityDetails({ activeFacility = 0 }) {
 
                 <View style={{ gap: '8px' }}>
                     <Text className="leading-[20px] font-tt-commons-medium text-[14px]">
-                        Harmonious Place
+                        {
+                            findFacilityNameById(activeFacility)
+                        }
                     </Text>
 
 

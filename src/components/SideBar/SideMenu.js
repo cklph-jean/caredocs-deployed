@@ -16,17 +16,22 @@ import useToggle from "../../hooks/useToggle"
 
 import { useEffect, useState } from "react";
 import { Image, View } from "react-native"
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import useAuthStore from "../../store/apis/caredocs/auth"
 
 
 
 export default function SideMenu() {
 
     const route = useRoute();
+    const navigation = useNavigation(); // hook into the navigation object
+
 
     const [activeMenu, setActiveMenu] = useState('');
     const [notifCount, setNotifCount] = useState(5);
     const [isOpenDropDownSettings, handleDropdownSettings] = useToggle(false);
+
+    const { logout } = useAuthStore();
 
     useEffect(() => {
         setActiveMenu(route.name);
@@ -51,11 +56,19 @@ export default function SideMenu() {
     ]
 
     const renderedAccountSettingsMenu = accountSettingsMenu.map((menu, index) => {
+        const handleLogoutPress = async () => {
+            if (menu.id == 3) {
+                await logout();
+            } else {
+                alert(`Should go to > ${menu.name} Page`)
+            }
+        }
+
         return <MenuButton
             key={index}
             activeMenu={activeMenu}
             menu={menu}
-            handleOnPress={() => alert(`Should go to > ${menu.name} Page`)} />
+            handleOnPress={handleLogoutPress} />
     })
 
     const accountSettingsActionContent = (

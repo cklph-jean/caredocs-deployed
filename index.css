@@ -35,11 +35,18 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.shadow-bottom {
+.shadow-bottom-md {
     box-shadow: 0px -4px 14px 0px rgba(0, 0, 0, 0.12);
 }
 
+.shadow-bottom-sm {
+    box-shadow: 0px -4px 14px 0px rgba(0, 0, 0, 0.08);
+}
 
 .custom-shadow-md {
-    @apply shadow-bottom;
+    @apply shadow-bottom-md;
+}
+
+.custom-shadow-sm {
+    @apply shadow-bottom-sm;
 }
