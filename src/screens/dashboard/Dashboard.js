@@ -325,7 +325,7 @@ export default function Dashboard() {
 
     return (
         <AdminLayout>
-            <View className="flex flex-col" style={{ gap: '24px' }}>
+            <View className="flex flex-col px-[70px] my-[32px]" style={{ gap: '24px' }}>
                 <View className="flex flex-row justify-between items-center">
                     {/* Title */}
                     <Text className="text-[28px] font-tt-commons-medium">
