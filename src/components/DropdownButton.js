@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Image, Pressable, Text } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 
 export default function DropdownButton({ img, fn, text }) {
   const classes = classNames(

@@ -22,7 +22,9 @@ export default function FacilityTile({ facility }) {
   };
 
   const handleBlur = () => {
-    setIsShown(false);
+    setTimeout(() => {
+      setIsShown(false);
+    }, 100);
   };
 
   return (
@@ -39,7 +41,12 @@ export default function FacilityTile({ facility }) {
             </Text>
           </View>
         </View>
-        <Pressable className="relative" onPress={handleClick}>
+        <Pressable
+          id="sd"
+          className="relative"
+          onPress={handleClick}
+          onBlur={handleBlur}
+        >
           {isShown && (
             <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px]">
               <DropdownButton img={EditIconGreen} text={"Edit"} />
