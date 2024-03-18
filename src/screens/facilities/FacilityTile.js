@@ -5,6 +5,7 @@ import EllipsisGreen from "../../assets/svg/EllipsisGreen.svg";
 import DeleteIconRed from "../../assets/svg/DeleteIconRed.svg";
 import EditIconGreen from "../../assets/svg/EditIconGreen.svg";
 import DropdownButton from "../../components/DropdownButton";
+import { useState } from "react";
 
 export default function FacilityTile({ facility }) {
   const renderedResidents =
@@ -13,6 +14,16 @@ export default function FacilityTile({ facility }) {
       : facility.residents;
   const remainingResidents =
     facility.residents.length > 6 ? facility.residents.length - 5 : 0;
+
+  const [isShown, setIsShown] = useState(false);
+
+  const handleClick = () => {
+    setIsShown(!isShown);
+  };
+
+  const handleBlur = () => {
+    setIsShown(false);
+  };
 
   return (
     <View className="w-[330px] rounded-[12px] py-[32px] px-[23px] bg-white mb-[24px] mr-[24px]">
@@ -28,11 +39,13 @@ export default function FacilityTile({ facility }) {
             </Text>
           </View>
         </View>
-        <Pressable className="relative">
-          <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px]">
-            <DropdownButton img={EditIconGreen} text={"Edit"} />
-            <DropdownButton img={DeleteIconRed} text={"Delete"} />
-          </View>
+        <Pressable className="relative" onPress={handleClick}>
+          {isShown && (
+            <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px]">
+              <DropdownButton img={EditIconGreen} text={"Edit"} />
+              <DropdownButton img={DeleteIconRed} text={"Delete"} />
+            </View>
+          )}
           <Image source={EllipsisGreen} />
         </Pressable>
       </View>
