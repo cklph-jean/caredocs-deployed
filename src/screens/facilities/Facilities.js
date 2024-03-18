@@ -104,7 +104,6 @@ export default function Facilities() {
       </View>
       <View className="mt-[16px] flex flex-row  flex-wrap mr-[-24px] justify-between">
         {data.map((item) => {
-          console.log(1);
           return <FacilityTile facility={item} />;
         })}
       </View>

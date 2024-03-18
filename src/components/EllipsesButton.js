@@ -24,7 +24,7 @@ export default function EllipsesButton() {
         <Image source={EllipsisGreen} />
       </Pressable>
       {isShown && (
-        <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px]">
+        <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px] custom-shadow">
           <DropdownButton img={EditIconGreen} text={"Edit"} />
           <DropdownButton img={DeleteIconRed} text={"Delete"} />
         </View>
