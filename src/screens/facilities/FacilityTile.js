@@ -41,20 +41,17 @@ export default function FacilityTile({ facility }) {
             </Text>
           </View>
         </View>
-        <Pressable
-          id="sd"
-          className="relative"
-          onPress={handleClick}
-          onBlur={handleBlur}
-        >
+        <View className="relative">
+          <Pressable onPress={handleClick} onBlur={handleBlur}>
+            <Image source={EllipsisGreen} />
+          </Pressable>
           {isShown && (
             <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px]">
               <DropdownButton img={EditIconGreen} text={"Edit"} />
               <DropdownButton img={DeleteIconRed} text={"Delete"} />
             </View>
           )}
-          <Image source={EllipsisGreen} />
-        </Pressable>
+        </View>
       </View>
       <View className="flex flex-row  py-[16px] mt-[32px] mr-[-8.8px] relative z-[0]">
         {renderedResidents.map((item) => (
