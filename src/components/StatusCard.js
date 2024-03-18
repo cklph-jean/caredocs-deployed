@@ -8,10 +8,10 @@ import { View, Text } from "react-native";
 import Card from "./Card";
 
 const defaultIcons = {
-    'error': <FiXCircle className="text-danger-500 w-[20px] h-[20px]" strokeWidth={3} />,
-    'success': <FiCheckCircle className="text-white w-[20px] h-[20px]" strokeWidth={3} />,
-    'warning': <FiAlertCircle className="text-black w-[20px] h-[20px]" strokeWidth={3} />,
-    'info': <FiInfo className="text-white w-[20px] h-[20px]" strokeWidth={3} />,
+    'error': <FiXCircle className="text-danger-500 w-[20px] h-[20px]" stroke="red" strokeWidth={3} />,
+    'success': <FiCheckCircle className="text-white w-[20px] h-[20px]" stroke="white" strokeWidth={3} />,
+    'warning': <FiAlertCircle className="text-black w-[20px] h-[20px]" stroke="black" strokeWidth={3} />,
+    'info': <FiInfo className="text-white w-[20px] h-[20px]"  stroke="white" strokeWidth={3} />,
 };
 
 export default function StatusCard({

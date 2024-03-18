@@ -14,45 +14,58 @@ import Button from "../../components/Button";
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { storeData } from "../../utils/asyncStorage";
 
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup'; // For validation schema
+import StatusCard from "../../components/StatusCard";
 
 export default function CreateAccount({ navigation }) {
 
   const [isPasswordOpen, setIsPasswordOpen] = useToggle(false);
   const [isConfirmPasswordOpen, setIsConfirmPasswordOpen] = useToggle(false);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+63');
 
-  const handleChange = (setState) => (event) => {
-    setState(event.target.value);
-  };
+  const [isValid, setIsValid] = useState(false);
+
+  const signUpData = {
+    firstname,
+    lastname,
+    email,
+    password,
+    confirmPassword,
+    phoneNumber,
+    countryCode
+  }
+
+  const validationSchema = Yup.object().shape({
+    firstname: Yup.string().required('First Name is required'),
+    lastname: Yup.string().required('Last Name is required'),
+    email: Yup.string().email('Invalid email format').required('Email is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
+    password: Yup.string().required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm password is required'),
+  });
 
   const handleChangeCountryCode = (code) => {
     setCountryCode(code)
   }
 
-  const handleFormSubmit = async () => {
+  const handleSubmit = async (values, { setSubmitting }) => {
+    setSubmitting(false); // Reset submitting state after submission
 
-    const signUpData = {
-      "firstname": firstName,
-      "lastname": lastName,
-      "email": email,
-      "password": password,
-      "confirm_password": confirmPassword,
-      "phone_number" : phoneNumber,
-      "country_code": countryCode
-    };
-
-
-    storeData( "signUpData", JSON.stringify(signUpData) ) // stored on localStorage in the meantime
+    storeData("signUpData", JSON.stringify(values)) // stored on localStorage in the meantime
     // TODO: Keep data secured...
 
     navigation.navigate('payment-method');
+    setIsValid(true);
   }
 
   let iconPassword = <FiEyeOff className="text-[#828282] w-[20px] h-[20px] p-0" />
@@ -149,76 +162,98 @@ export default function CreateAccount({ navigation }) {
             </View>
 
             <View className="mt-[24px]" style={{ gap: '32px' }}>
-              <View style={{ gap: '16px' }}>
 
-                <InputField
-                  label="First name"
-                  placeholder="Input your first name here"
-                  value={firstName}
-                  onChange={handleChange(setFirstName)}
-                />
+              <Formik initialValues={signUpData} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+                  <Form>
+                    <View style={{ gap: '16px' }}>
 
-                <InputField
-                  label="Last name"
-                  placeholder="Input your last name here"
-                  value={lastName}
-                  onChange={handleChange(setLastName)}
-                />
+                      <InputField
+                        label="First name"
+                        placeholder="Input your first name here"
+                        onChange={handleChange('firstname')}
+                        onBlur={handleBlur('firstname')}
+                      />
 
-                <InputField
-                  label="Phone number"
-                  placeholder="0"
-                  value={phoneNumber}
-                  onChange={handleChange(setPhoneNumber)}
-                  inputType="phone"
-                  onChangeCountryCode={handleChangeCountryCode}
-                />
+                      {errors.firstname && touched.firstname && <StatusCard error message={errors.firstname} />}
 
-                <InputField
-                  label="Email"
-                  placeholder="name@email.com"
-                  value={email}
-                  onChange={handleChange(setEmail)}
-                />
+                      <InputField
+                        label="Last name"
+                        placeholder="Input your last name here"
+                        onChange={handleChange('lastname')}
+                        onBlur={handleBlur('lastname')}
+                      />
 
-                <InputField
-                  label="Create a new password"
-                  placeholder="Input password here"
-                  value={password}
-                  onChange={handleChange(setPassword)}
-                  secureTextEntry={!isPasswordOpen ? true : false}
-                  icon={<Button className="p-0" onPress={setIsPasswordOpen}>{iconPassword}</Button>}
-                />
+                      {errors.lastname && touched.lastname && <StatusCard error message={errors.lastname} />}
 
-                <InputField
-                  label="Confirmation password"
-                  placeholder="Input password here"
-                  value={confirmPassword}
-                  onChange={handleChange(setConfirmPassword)}
-                  secureTextEntry={!isConfirmPasswordOpen ? true : false}
-                  icon={<Button className="p-0" onPress={setIsConfirmPasswordOpen}>{iconConfirmPassword}</Button>}
-                />
+                      <InputField
+                        label="Phone number"
+                        placeholder="0"
+                        onChange={handleChange('phoneNumber')}
+                        onBlur={handleBlur('phoneNumber')}
+                        inputType="phone"
+                        onChangeCountryCode={handleChangeCountryCode}
+                      />
 
-              </View>
+                      {errors.phoneNumber && touched.phoneNumber && <StatusCard error message={errors.phoneNumber} />}
 
-              <View className="flex flex-col items-start" style={{ gap: '16px' }}>
-                <Button
-                  onPress={handleFormSubmit}
-                  primary
-                  rounded
-                  textClass="text-white"
-                  className="flex-none py-[12px] px-[18px]" > Sign up </Button>
+                      <InputField
+                        label="Email"
+                        placeholder="name@email.com"
+                        onChange={handleChange('email')}
+                        onBlur={handleBlur('email')}
+                      />
+
+                      {errors.email && touched.email && <StatusCard error message={errors.email} />}
+
+                      <InputField
+                        label="Create a new password"
+                        placeholder="Input password here"
+                        onChange={handleChange('password')}
+                        onBlur={handleBlur('password')}
+                        secureTextEntry={!isPasswordOpen ? true : false}
+                        icon={<Button className="p-0" onPress={setIsPasswordOpen}>{iconPassword}</Button>}
+                      />
+
+                      {errors.password && touched.password && <StatusCard error message={errors.password} />}
+
+                      <InputField
+                        label="Confirmation password"
+                        placeholder="Input password here"
+                        onChange={handleChange('confirmPassword')}
+                        onBlur={handleBlur('confirmPassword')}
+                        secureTextEntry={!isConfirmPasswordOpen ? true : false}
+                        icon={<Button className="p-0" onPress={setIsConfirmPasswordOpen}>{iconConfirmPassword}</Button>}
+                      />
+
+                      {errors.confirmPassword && touched.confirmPassword && <StatusCard error message={errors.confirmPassword} />}
+
+                    </View>
+
+                    <View className="flex flex-col items-start mt-[32px]" style={{ gap: '16px' }}>
+                      <Button
+                        onPress={handleSubmit}
+                        disabled={isSubmitting}
+                        primary
+                        rounded
+                        textClass="text-white"
+                        className="flex-none py-[12px] px-[18px]" > Sign up </Button>
 
 
-                <View className="flex flex-row text-[14px] items-center">
-                  <Text className="font-sans font-normal">Already have an account? </Text>
-                  <Link
-                    className="text-purple"
-                    navigation={navigation}
-                    screenName="login"
-                    text="Go to login page" />
-                </View>
-              </View>
+                      <View className="flex flex-row text-[14px] items-center">
+                        <Text className="font-sans font-normal">Already have an account? </Text>
+                        <Link
+                          className="text-purple"
+                          navigation={navigation}
+                          screenName="login"
+                          text="Go to login page" />
+                      </View>
+                    </View>
+
+                  </Form>
+                )}
+              </Formik>
+
             </View>
 
 
