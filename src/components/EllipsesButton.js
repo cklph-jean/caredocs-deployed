@@ -6,7 +6,7 @@ import EditIconGreen from "../assets/svg/EditIconGreen.svg";
 import { useState } from "react";
 
 export default function EllipsesButton({ color = null }) {
-  const [isShown, setIsShown] = useState(true);
+  const [isShown, setIsShown] = useState(false);
 
   const handleClick = () => {
     setIsShown(!isShown);
