@@ -7,9 +7,8 @@ export default function AdminLayout({ children }) {
             <View className="flex flex-row h-full w-full">
                 <SideBar />
 
-                <View className='flex-auto flex-col px-[70px] my-[32px]'>
+                <View className='flex-auto flex-col'>
                     {/* NavBar */}
-                    
                     {children}
                 </View>
             </View>
