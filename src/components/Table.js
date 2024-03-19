@@ -1,9 +1,18 @@
-import { View, Text } from 'react-native'
-import { Fragment } from 'react'
+import { View, Text, Pressable } from 'react-native'
+import { Fragment, useState } from 'react'
 
-export default function Table({ data, config, keyFn }) {
+export default function Table({ data, config, keyFn, handleRowData }) {
+    const [ isRowPressed, setIsRowPressed ] = useState(false);
+    const [ activeRow, setActiveRow ] = useState(0);
+
+    const handlePressedRow = ( rowData, rowIndex ) => {
+        setIsRowPressed(true);
+        setActiveRow(rowIndex);
+        handleRowData( rowData )
+    }
 
     const renderedHeaders = config.map((column, index) => {
+
         if (column.header) {
             return <Fragment key={column.label}>{column.header()}</Fragment>;
         }
@@ -18,23 +27,23 @@ export default function Table({ data, config, keyFn }) {
         );
     });
 
-    const renderedRows = data.map((rowData) => {
+    const renderedRows = data.map((rowData, rowIndex) => {
         const renderedCells = config.map((column, index) => {
 
             const leftClass = index == 0 ? 'pl-[24px] rounded-l-[12px]' : '';
             const rightClass = index == config.length - 1 ? 'pr-[24px] rounded-r-[12px]' : '';
     
             return (
-                <View className={`table-cell align-middle py-[24px] bg-white ${leftClass} ${rightClass}`} key={column.label}>
-                    <Text>{column.render(rowData)}</Text>
+                <View className={`table-cell align-middle py-[24px] ${ ( activeRow == rowIndex && isRowPressed ) ? 'bg-[#D4F7F3]' : 'bg-white' } ${leftClass} ${rightClass}`} key={column.label}>
+                    <Text>{column.render(rowData, activeRow, rowIndex, isRowPressed)}</Text>
                 </View>
             );
         });
 
         return (
-            <View className="table-row text-left " key={keyFn(rowData)} align="center">
+            <Pressable className={`table-row text-left z-[-1] ${ activeRow == rowIndex && isRowPressed ? 'custom-shadow rounded-xl' : '' }`}  onPress={() => handlePressedRow(rowData, rowIndex)} key={keyFn(rowData)} align="center">
                 {renderedCells}
-            </View>
+            </Pressable>
         );
     });
 
@@ -45,7 +54,7 @@ export default function Table({ data, config, keyFn }) {
                     {renderedHeaders}
                 </View>
             </View>
-            <View className="table-row-group ">
+            <View className="table-row-group">
                 {renderedRows}
             </View>
         </View>

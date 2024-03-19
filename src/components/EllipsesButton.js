@@ -5,8 +5,8 @@ import DeleteIconRed from "../assets/svg/DeleteIconRed.svg";
 import EditIconGreen from "../assets/svg/EditIconGreen.svg";
 import { useState } from "react";
 
-export default function EllipsesButton() {
-  const [isShown, setIsShown] = useState(false);
+export default function EllipsesButton({ color = null }) {
+  const [isShown, setIsShown] = useState(true);
 
   const handleClick = () => {
     setIsShown(!isShown);
@@ -21,7 +21,7 @@ export default function EllipsesButton() {
   return (
     <View className="relative">
       <Pressable onPress={handleClick} onBlur={handleBlur}>
-        <Image source={EllipsisGreen} />
+        <Image source={EllipsisGreen} tintColor={color ?? ''} />
       </Pressable>
       {isShown && (
         <View className="absolute top-[100%] right-[0px] pt-[8px] pr-[8px] pl-[8px] pb-[4px] bg-white rounded-[8px] custom-shadow">

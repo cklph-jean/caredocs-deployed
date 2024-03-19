@@ -27,7 +27,7 @@ export default function Button({
             "border border-primary bg-white text-primary px-[18px] py-[12px] rounded-[5px]": secondary,
             "border border-success bg-success text-white": success,
             "border border-warning bg-warning text-black": warning,
-            "border border-danger bg-danger text-white": danger && !outline,
+            "border border-danger-500 bg-danger-500 text-white rounded-[5px]": danger && !outline,
             "border border-white bg-white text-black": white,
             "rounded": rounded,
             "rounded-full": circle,

@@ -24,6 +24,8 @@ import Facilities from '../screens/facilities';
 import useAuthStore from '../store/apis/caredocs/auth';
 import { retrieveData } from '../utils/asyncStorage';
 import { useEffect, useState } from "react";
+import CreateStaff from "../screens/staff/create-staff";
+import EditStaff from "../screens/staff/edit-staff";
 
 // End of Signed In Stacks
 
@@ -45,12 +47,14 @@ const SignedOutNavigator = () => {
 const SignedInNavigator = () => {
     return (
         <SignedInStack.Navigator>
+            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="create-staff" component={CreateStaff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
             <SignedInStack.Screen name="communication" component={Communication} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residential-notes" component={ResidentialNotes} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residents" component={Residents} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="facilities" component={Facilities} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="edit-staff" component={EditStaff} options={{ headerShown: false }} />
         </SignedInStack.Navigator>
     )
 }
