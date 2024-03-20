@@ -8,6 +8,7 @@ const useAuthStore = create((set) => ({
     user: null,
     error: null,
     isAuthenticated: false,
+    isLoggedOut: false,
     setUser: (user) => set({ user: user }),
     login: async ({ ...data }) => {
         try {
@@ -67,8 +68,7 @@ const useAuthStore = create((set) => ({
     logout: async () => {
         await removeData('token')
         await removeData('userData')
-        set({ isAuthenticated: false });
-        set({ user: null });
+        set({ isLoggedOut: true });
     }
 }));
 

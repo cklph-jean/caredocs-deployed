@@ -84,11 +84,9 @@ export default function FacilityDetails(
                     <Image source={FacilityIcon} tintColor={'#26C8B8'} />
                 </View>
 
-                <View style={{ gap: '8px' }}>
+                <View className="flex flex-shrink" style={{ gap: '8px' }}>
                     <Text className="leading-[20px] font-tt-commons-medium text-[14px]">
-                        {
-                            findFacilityNameById(activeFacility)
-                        }
+                        { findFacilityNameById(activeFacility) }
                     </Text>
 
 

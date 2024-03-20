@@ -12,12 +12,12 @@ export default function InfoCard({
 }) {
 
     const classes = className(
-        "flex font-sans shrink-0 bg-white px-[40px] py-[40px] rounded-[31px] w-auto",
+        "flex  shrink-0 bg-white px-[40px] py-[40px] rounded-[31px] w-auto",
         rest.className
     );
 
     const imgContainerClassess = className(
-        "flex relative -z-10",
+        "flex relative",
         {
             "lg:w-[180px]": imagePosition == "right",
             "lg:w-[279px]": imagePosition == "left"
@@ -41,7 +41,7 @@ export default function InfoCard({
 
 
                     {/* Start of Description */}
-                    <Text className="font-sans font-normal text-[20px] leading-[28px]">
+                    <Text className=" z-[1] font-normal text-[20px] leading-[28px]">
                         {description}
                     </Text>
                     {/* End of Description */}

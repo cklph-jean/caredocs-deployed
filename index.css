@@ -20,10 +20,13 @@
     src: url('assets/fonts/TT_Commons_Medium.otf') format('truetype');
 }
 
-* {
+/* * {
     font-family: 'TT Commons', Helvetica, Arial, sans-serif !important;
     color: #4D4D4D;
+} */
 
+* {
+    z-index: unset !important;
 }
 
 .custom-shadow {

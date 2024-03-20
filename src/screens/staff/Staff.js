@@ -30,7 +30,7 @@ export default function Staff({ navigation }) {
                                 <Image
                                     source={ImportIcon}
                                 />
-                                <Text className="text-[14px] font-tt-commons-medium font-bold pl-[6px] items-center leading-[20px]">
+                                <Text className="text-[14px] font-sans font-[600] pl-[6px] items-center leading-[20px]">
                                     Import  From CSV File
                                 </Text>
                             </Button>
@@ -44,7 +44,7 @@ export default function Staff({ navigation }) {
                                 <Image
                                     source={PlusIcon}
                                 />
-                                <Text className="text-[14px] pl-[6px] items-center leading-[20px] font-tt-commons-medium font-bold">
+                                <Text className="text-[14px] pl-[6px] items-center leading-[20px] font-sans font-[600] text-white">
                                     Create New Staff
                                 </Text>
                             </Button>

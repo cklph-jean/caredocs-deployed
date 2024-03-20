@@ -1,4 +1,5 @@
 import { View } from 'react-native';
+import './src/assets/styles/fonts.css'
 import './index.css';
 import AuthProvider from './src/context/AuthContext';
 import MainWrapper from './src/layout/MainWrapper';

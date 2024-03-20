@@ -17,7 +17,7 @@ export default function SideBar({ navigation }) {
                     />
                 </View>
 
-                <View className="pt-[32px] items-center" style={{ gap: '24px' }}>
+                <View className="pt-[32px] items-center z-[1]" style={{ gap: '24px' }}>
                     <UserDetails />
 
                     <FacilityDetails />

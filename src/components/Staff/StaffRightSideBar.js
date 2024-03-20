@@ -1,5 +1,6 @@
 import { View, Text, Image } from 'react-native'
 import { useStaffListStore } from '../../store/apis/caredocs/staff/staffStore';
+import { useNavigation } from '@react-navigation/native';
 import RightSideBar from "../RightSideBar";
 import GroupIconPrimary from "../../assets/svg/GroupIconPrimary.svg"
 import PlusIcon from '../../assets/svg/PlusIcon.svg'
@@ -11,11 +12,19 @@ import RightArrowIcon from '../../assets/svg/RightArrowIcon.svg'
 import DeleteIcon from "../../assets/svg/DeleteIconRed.svg";
 import EditIcon from "../../assets/svg/EditIconGreen.svg";
 import Button from '../Button';
-import { useNavigation } from '@react-navigation/native';
+import DeleteConfirmationModal from '../DeleteConfirmationModal';
+import useDeleteModal from '../../hooks/useDeleteModal';
 
 export default function StaffRightSideBar() {
     const navigation = useNavigation();
     const { activeRowStaff } = useStaffListStore();
+
+    const { isDeleteModalShow, handleModalClose, handleModalOpen } = useDeleteModal();
+
+
+    const handleDeleteStaff = () => {
+        handleModalOpen();
+    };
 
     let content = "";
 
@@ -31,15 +40,15 @@ export default function StaffRightSideBar() {
                         />
 
                         <View className="items-center" style={{ gap: 4 }}>
-                            <Text className=" font-tt-commons-medium font-bold text-[28px] ">
+                            <Text className=" font-sans font-[600] text-[22px] ">
                                 {activeRowStaff.name}
                             </Text>
 
-                            <Text className="font-sans text-[20px]">
-                                “Delisha”
+                            <Text className=" text-[14px]">
+                                “{activeRowStaff.name}”
                             </Text>
 
-                            <Text className="font-sans text-[20px]">
+                            <Text className=" text-[14px]">
                                 Harmonious Place
                             </Text>
                         </View>
@@ -48,7 +57,7 @@ export default function StaffRightSideBar() {
                     <View className="my-[32px] border-b border-gray-50"></View>
 
                     <View>
-                        <Text className=" font-tt-commons-medium font-bold text-[24px] mb-[24px] ">
+                        <Text className="font-sans font-bold text-[18px] mb-[24px] ">
                             Staff Info
                         </Text>
 
@@ -84,10 +93,10 @@ export default function StaffRightSideBar() {
                                 </Text>
                             </View>
 
-                            <Text className="text-purple flex justify-center items-center text-[16px] font-tt-commons-medium text-center">
+                            <Text className="text-purple font-sans font-[600] flex justify-center items-center text-[16px]  text-center">
                                 Show Full Information
                                 <Image
-                                    className="pl-[4px]"
+                                    className="ml-[4px]"
                                     source={RightArrowIcon}
                                 />
                             </Text>
@@ -96,9 +105,9 @@ export default function StaffRightSideBar() {
                 </View>
 
                 <View style={{ gap: 16 }}>
-                    <Button 
+                    <Button
                         onPress={() => navigation.navigate('edit-staff')}
-                        primary 
+                        primary
                         className="px-[18px] py-[12px]">
                         <Image
                             source={EditIcon}
@@ -106,17 +115,20 @@ export default function StaffRightSideBar() {
                             className="w-[16px] h-[16px]"
                         />
 
-                        <Text className="pl-[6px] font-tt-commons-medium font-bold text-white text-center">
+                        <Text className="pl-[6px] font-sans font-[600] text-white text-center">
                             Edit This Staff
                         </Text>
                     </Button>
-                    <Button danger className="px-[18px] py-[12px]">
+                    <Button
+                        danger
+                        onPress={handleDeleteStaff}
+                        className="px-[18px] py-[12px]">
                         <Image
                             source={DeleteIcon}
                             tintColor='white'
                             className="w-[16px] h-[16px]"
                         />
-                        <Text className="font-tt-commons-medium font-bold text-white pl-[6px]">
+                        <Text className="font-sans font-[600] text-white pl-[6px]">
                             Delete This Staff
                         </Text>
                     </Button>
@@ -133,7 +145,7 @@ export default function StaffRightSideBar() {
                         />
                     </View>
 
-                    <Text className="font-tt-commons-medium text-[18px] font-bold">
+                    <Text className=" text-[18px]">
                         No Staff Selected
                     </Text>
 
@@ -152,7 +164,7 @@ export default function StaffRightSideBar() {
                         <Image
                             source={PlusIcon}
                         />
-                        <Text className="font-tt-commons-medium text-[14px] ml-[10px]">
+                        <Text className="font-sans font-[600] text-white text-[14px] ml-[10px]">
                             Create New Staff
                         </Text>
                     </Button>
@@ -161,7 +173,7 @@ export default function StaffRightSideBar() {
                         <Image
                             source={ImportIcon}
                         />
-                        <Text className="font-tt-commons-medium text-[14px] pl-[6px] items-center leading-[20px]">
+                        <Text className="font-sans font-[600] text-[14px] pl-[6px] items-center leading-[20px]">
                             Import  From CSV File
                         </Text>
                     </Button>
@@ -174,6 +186,8 @@ export default function StaffRightSideBar() {
         <>
             <RightSideBar>
                 {content}
+
+                {<DeleteConfirmationModal handleClose={handleModalClose} showModal={isDeleteModalShow} />}
             </RightSideBar>
         </>
     )

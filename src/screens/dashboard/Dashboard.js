@@ -82,7 +82,7 @@ const config = [
                 <View className="pt-[12px] w-[140px]">
                     <View className="flex-row w-full" style={{ gap: '10px' }}>
                         <Text>{data.postInfo.date}</Text>
-                        <Text className="font-sans">{data.postInfo.time}</Text>
+                        <Text className="">{data.postInfo.time}</Text>
                     </View>
 
                     <Text className="text-purple text-[14px] font-tt-commons-medium font-bold leading-5">
@@ -139,7 +139,7 @@ const recentResidentialNoteConfig = [
                 <View className="py-[12px] w-[140px]">
                     <View className="flex-row w-full" style={{ gap: '10px' }}>
                         <Text>{data.postInfo.date}</Text>
-                        <Text className="font-sans">{data.postInfo.time}</Text>
+                        <Text className="">{data.postInfo.time}</Text>
                     </View>
 
                     <Text className="text-black text-[14px] font-tt-commons-medium font-bold leading-5">
@@ -223,7 +223,7 @@ const recentCommunicationConfig = [
                 <View className="py-[12px] w-[140px]">
                     <View className="flex-row w-full" style={{ gap: '10px' }}>
                         <Text>{data.postInfo.date}</Text>
-                        <Text className="font-sans">{data.postInfo.time}</Text>
+                        <Text className="">{data.postInfo.time}</Text>
                     </View>
 
                     <Text className="text-black text-[14px] font-tt-commons-medium font-bold leading-5">

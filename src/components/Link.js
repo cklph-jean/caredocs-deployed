@@ -11,7 +11,7 @@ export default function Link ({ url, navigation, screenName, text, ...rest }) {
   };
 
   const linkClasses = classNames(
-    "font-sans font-normal text-[14px] underline leading-[20px]",
+    " font-normal text-[14px] underline leading-[20px]",
     rest.className
   )
 

@@ -20,14 +20,14 @@ export default function Button({
 }) {
 
     const classes = className(
-        "font-sans font-normal flex items-center transition duration-500 ease-in-out justify-center",
+        " font-normal flex items-center transition duration-500 ease-in-out justify-center",
         {
             "opacity-80": loading,
             "border border-primary bg-primary text-white px-[18px] py-[12px] rounded-[5px]": primary && !outline,
             "border border-primary bg-white text-primary px-[18px] py-[12px] rounded-[5px]": secondary,
             "border border-success bg-success text-white": success,
             "border border-warning bg-warning text-black": warning,
-            "border border-danger-500 bg-danger-500 text-white rounded-[5px]": danger && !outline,
+            "border border-danger-500 bg-danger-500 text-white px-[18px] py-[12px] rounded-[5px]": danger && !outline,
             "border border-white bg-white text-black": white,
             "rounded": rounded,
             "rounded-full": circle,
@@ -39,18 +39,19 @@ export default function Button({
             "": outline && secondary && hover,
             "": outline && success,
             "": outline && warning,
-            "": outline && danger,
+            "border border-red-500 rounded-[5px] px-[18px] py-[12px] text-white": outline && danger,
             "": outline && danger && hover
         },
         rest.className
     );
 
     const textClasses = className(
-        "flex items-center font-tt-commons-medium",
+        "flex items-center font-sans font-[600]",
         {
-            "text-primary font-[600] text-[14px]": secondary,
-            "text-white": primary && !disabled,
-            "text-gray-400": disabled
+            "text-primary text-[14px]": secondary,
+            "text-gray-400": disabled,
+            "text-danger-500": danger && outline,
+            "text-white": (danger && !outline || primary && !disabled),
         },
         rest.textClass
     )

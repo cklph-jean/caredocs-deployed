@@ -13,11 +13,11 @@ export default function PackagePlanCard({
     }
 
     renderItem = ({ item }) => (
-        <View className="p-3 flex flex-row items-center" style={{ gap: '12px' }}>
+        <View className="py-1 flex flex-row items-center" style={{ gap: '12px' }}>
             <FiCheck
                 className="w-[24px] h-[24px]"
             />
-            <Text className="font-sans text-[14px]">{item.inclusion}</Text>
+            <Text className=" text-[14px]">{item.inclusion}</Text>
         </View>
     );
 
@@ -34,7 +34,7 @@ export default function PackagePlanCard({
                     </Text>
                 </View>
 
-                <Text className="flex mt-[10px] mb-[14px] leading-5 font-sans font-[400] text-[14px]">
+                <Text className="flex mt-[10px] mb-[14px] leading-5  font-[400] text-[14px]">
                     {data.packageDescription}
                 </Text>
 

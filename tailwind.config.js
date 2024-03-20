@@ -34,9 +34,10 @@ module.exports = {
       },
 
       fontFamily: {
-        'sans': ['TT Commons', 'Helvetica', 'Arial', 'sans-serif'],
+        'sans': ['tt-commons-pro', 'sans-serif'],
         'tt-commons-bold': ['TT Commons Bold', 'sans-serif'],
-        'tt-commons-medium': ['TT Commons Medium', 'sans-serif'],
+        'tt-commons-thin': ['tt-commons-pro-thin', 'sans-serif'],
+        'tt-commons-medium': ['tt-commons-pro', 'sans-serif'],
       },
     }
   },

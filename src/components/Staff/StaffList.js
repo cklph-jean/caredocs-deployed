@@ -6,14 +6,25 @@ import EllipsesButton from '../../components/EllipsesButton'
 import GenderIcon from '../../assets/svg/GenderIcon.svg'
 import Button from '../Button'
 import { useStaffListStore } from '../../store/apis/caredocs/staff/staffStore'
+import { useNavigation } from '@react-navigation/native'
+import useDeleteModal from '../../hooks/useDeleteModal'
+import DeleteConfirmationModal from '../DeleteConfirmationModal'
 
 export default function StaffList() {
+
+    const navigator = useNavigation();
 
     const { setActiveRowStaff } = useStaffListStore();
 
     const handleRowData = (staffData) => {
         setActiveRowStaff(staffData);
     }
+
+    const { isDeleteModalShow, handleModalClose, handleModalOpen } = useDeleteModal();
+
+    const handleDeleteStaff = () => {
+        handleModalOpen();
+    };
 
     const data = [
         { id: 1, name: "Delisha", team: "Director Board", phone: "+01271234567", gender: "Female", email: "delisha@gmail.com", avatar: ProfilePic },
@@ -77,7 +88,7 @@ export default function StaffList() {
                 return (
                     <View className="flex flex-row justify-evenly items-center">
                         <Button className={`${buttonClass} rounded-full px-[16px] py-[8px]`}>
-                            <View className="flex flex-row">
+                            <View className="flex flex-row items-center">
                                 <Image
                                     source={GenderIcon}
                                     tintColor={iconColor}
@@ -87,12 +98,28 @@ export default function StaffList() {
                                 </Text>
                             </View>
                         </Button>
-
-                        <EllipsesButton color={iconColor} />
                     </View>
                 )
             },
         },
+        {
+            label: "",
+            render: (staff, activeRow, rowIndex, isRowPressed) => {
+                let iconColor;
+                if (activeRow == rowIndex && isRowPressed) {
+                    iconColor = "#26C8B8";
+                } else {
+                    iconColor = "#B693F8";
+                }
+                return (
+                    <EllipsesButton
+                        color={iconColor}
+                        handleEditButton={() => navigator.navigate('edit-staff')}
+                        handleDeleteButton={handleDeleteStaff}
+                    />
+                )
+            }
+        }
     ];
 
     const keyFn = (staff) => {
@@ -100,10 +127,16 @@ export default function StaffList() {
     };
 
     return (
-        <Table
-            data={data}
-            config={config}
-            keyFn={keyFn}
-            handleRowData={handleRowData} />
+        <>
+            <Table
+                data={data}
+                config={config}
+                keyFn={keyFn}
+                handleRowData={handleRowData} />
+
+            {<DeleteConfirmationModal handleClose={handleModalClose} showModal={isDeleteModalShow} />}
+
+        </>
+
     )
 }

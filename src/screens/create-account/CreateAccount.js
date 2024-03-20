@@ -80,7 +80,7 @@ export default function CreateAccount({ navigation }) {
   }
 
   return (
-    <View className="items-center py-[20px] lg:px-20 min-h-screen justify-center font-sans">
+    <View className="items-center py-[20px] lg:px-20 min-h-screen justify-center ">
 
       <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
 
@@ -123,7 +123,7 @@ export default function CreateAccount({ navigation }) {
 
                   <View className="justify-center">
                     <Text className="font-[400] text-[16px]">Shaina</Text>
-                    <Text className="font-sans">General Practicioner</Text>
+                    <Text className="">General Practicioner</Text>
                   </View>
                 </View>
               </View>
@@ -155,7 +155,7 @@ export default function CreateAccount({ navigation }) {
                   Set your login credential
                 </Text>
 
-                <Text className="mt-[12px] text-[16px] font-sans lead-[22px]">
+                <Text className="mt-[12px] text-[16px]  lead-[22px]">
                   Let’s make your administration process more easily with CareDocs.
                 </Text>
               </Card>
@@ -241,7 +241,7 @@ export default function CreateAccount({ navigation }) {
 
 
                       <View className="flex flex-row text-[14px] items-center">
-                        <Text className="font-sans font-normal">Already have an account? </Text>
+                        <Text className=" font-normal">Already have an account? </Text>
                         <Link
                           className="text-purple"
                           navigation={navigation}

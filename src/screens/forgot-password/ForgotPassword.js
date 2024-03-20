@@ -21,7 +21,7 @@ export default function ForgotPassword({ navigation }) {
             Forgot Password?
           </Text>
 
-          <Text className="font-normal text-[16px] font-sans lead-[22px]">
+          <Text className="font-normal text-[16px]  lead-[22px]">
             Don’t worry! We will send you a link to reset your password
           </Text>
         </Card>
@@ -41,7 +41,7 @@ export default function ForgotPassword({ navigation }) {
           </Button>
 
           <View className="flex flex-row text-[14px] items-center">
-            <Text className="font-sans font-normal">Remember your password? </Text>
+            <Text className=" font-normal">Remember your password? </Text>
             <Link
               className="text-purple"
               navigation={navigation}

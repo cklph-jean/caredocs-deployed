@@ -10,7 +10,7 @@ export default function InputField({
 
     return (
         <View style={{ gap: label ? '4px' : 0 }}>
-            <Text className="font-sans text-[14px] text-secondary">
+            <Text className="text-[14px] text-[#828282]">
                 {label}
             </Text>
 

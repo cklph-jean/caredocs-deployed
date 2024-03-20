@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import ReactDOM from "react-dom";
 import { FiX } from "react-icons/fi";
-import { Text, View } from "react-native";
+import ReactDOM from "react-dom";
 import Button from "./Button";
+import { View } from "react-native";
 
 export default function PopUpModal({ onClose, children, actionBar, ...rest }) {
     useEffect(() => {

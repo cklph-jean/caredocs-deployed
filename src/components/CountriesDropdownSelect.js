@@ -23,7 +23,7 @@ export default function CountriesDropdownSelect({ handleSelectCountry }) {
 
     return <>
         <View className="relative z-[2]" style={{ gap: '4px' }}>
-            <Text className="font-sans text-[14px] text-secondary">
+            <Text className=" text-[14px] text-secondary">
                 Country
             </Text>
 

@@ -24,7 +24,7 @@ export default function ResendEmailCountdown({ reSent = false }) {
         {
             reSent && <Text className="text-success-500 text-right">Email Re-sent!</Text>
         }
-        <Text className="text-right text-gray-500 font-[400] font-sans ">
+        <Text className="text-right text-gray-500 font-[400]  ">
             {reSent && 'New'} Resend will be available in {formattedTime}s
         </Text>
     </>

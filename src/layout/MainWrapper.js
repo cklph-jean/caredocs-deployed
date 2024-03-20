@@ -48,12 +48,12 @@ const SignedInNavigator = () => {
     return (
         <SignedInStack.Navigator>
             <SignedInStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="create-staff" component={CreateStaff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="communication" component={Communication} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residential-notes" component={ResidentialNotes} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residents" component={Residents} options={{ headerShown: false }} />
             <SignedInStack.Screen name="facilities" component={Facilities} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="create-staff" component={CreateStaff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="edit-staff" component={EditStaff} options={{ headerShown: false }} />
         </SignedInStack.Navigator>
     )
@@ -74,7 +74,7 @@ const navigationConfig = {
 };
 
 export default function MainWrapper() {
-    const { isAuthenticated, setUser } = useAuthStore();
+    const { isAuthenticated, setUser, isLoggedOut } = useAuthStore();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // const isLoggedIn = (retrieveData('token') || isAuthenticated) ? true : false;
@@ -83,7 +83,7 @@ export default function MainWrapper() {
         const checkLoginStatus = async () => {
             try {
                 const token = await retrieveData('token');
-                setIsLoggedIn(token || isAuthenticated);
+                setIsLoggedIn((token || isAuthenticated) && !isLoggedOut);
 
                 if ( token ) {
                     const userData = await retrieveData('userData');
@@ -97,7 +97,7 @@ export default function MainWrapper() {
         };
 
         checkLoginStatus();
-    }, [isAuthenticated, isLoggedIn]);
+    }, [isAuthenticated, isLoggedIn, isLoggedOut]);
 
     return (
         <NavigationContainer

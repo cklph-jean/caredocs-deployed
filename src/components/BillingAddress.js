@@ -28,7 +28,7 @@ export default function BillingAddress({ cities, handleBillingAddressValues }) {
     return (
         <View style={{ gap: '4px' }}>
             {/* TODO MAKE COMPONENT FOR BILLING ADDRESS */}
-            <Text className="font-sans text-[14px] text-secondary">
+            <Text className=" text-[14px] text-secondary">
                 Billing address
             </Text>
 

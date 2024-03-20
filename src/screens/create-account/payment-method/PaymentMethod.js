@@ -123,7 +123,7 @@ export default function PaymentMethod() {
                     Check your email inbox
                 </Text>
 
-                <Text className="font-sans text-[14px]">
+                <Text className=" text-[14px]">
                     We sent a link to <Text className="font-[800]">{email}</Text>. If you don’t see it, check your spam folder. After confirming your email, you can explore the platform.
                 </Text>
             </View>
@@ -132,7 +132,7 @@ export default function PaymentMethod() {
     );
 
     return (
-        <View className="items-center min-h-screen justify-center font-sans">
+        <View className="items-center min-h-screen justify-center ">
             <View className="flex flex-col py-10 lg:py-0 lg:flex-row lg:flex-wrap w-full items-center">
                 {/* Left Area */}
                 <View className="lg:flex items-center lg:w-1/2 pb-[32px]" style={{ gap: '32px' }}>
@@ -154,7 +154,7 @@ export default function PaymentMethod() {
                                     Payment method
                                 </Text>
 
-                                <Text className="text-[16px] font-sans lead-[22px]">
+                                <Text className="text-[16px]  lead-[22px]">
                                     Let’s make your administration process more easily with CareDocs.
                                 </Text>
                             </Card>
@@ -180,7 +180,7 @@ export default function PaymentMethod() {
                             />
                         </View>
 
-                        <Text className="font-sans -z-10">
+                        <Text className=" -z-10">
                             By click payment, you agree to CareDocs <Link className="text-purple" text="Terms of Use" /> and <Link className="text-purple" text="Privacy policy" />. This subscription automatically renews monthly, and you’ll be notified if the above amount increases.
                         </Text>
 
@@ -213,7 +213,7 @@ export default function PaymentMethod() {
 
                     {/* Content */}
                     <View className="relative z-10 items-center pt-[182px]">
-                        <View className="w-[356px] font-sans">
+                        <View className="w-[356px] ">
 
                             <View className="pb-[24px]" style={{ gap: '24px' }}>
                                 <Text className="text-white text-[22px]">Order Summary</Text>

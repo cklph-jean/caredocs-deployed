@@ -16,6 +16,7 @@ import useToggle from "../../hooks/useToggle";
 import StatusCard from "../../components/StatusCard";
 import Card from "../../components/Card";
 import useAuthStore from "../../store/apis/caredocs/auth";
+import { FiEyeOff, FiEye } from "react-icons/fi";
 
 
 export default function Login({ navigation }) {
@@ -28,13 +29,18 @@ export default function Login({ navigation }) {
 
     const { user, error, login } = useAuthStore();
 
+
     useEffect(() => {
         if (error) {
             setIsFailedLogin(true);
             setIsLoginDisabled(false)
         }
-
     }, [error])
+
+    let passwordIcon = <FiEyeOff size={20} color="#828282" className="w-[20px] h-[20px]" />;
+    if (isPasswordOpen) {
+        passwordIcon = <FiEye size={20} color="#828282" className="w-[20px] h-[20px]" />
+    }
 
     const handleChange = (setState) => (event) => {
         setState(event.target.value);
@@ -46,8 +52,8 @@ export default function Login({ navigation }) {
     }
 
     const welcomeTitle = <>
-        <Text className="text-[32px] font-sans font-normal">
-            Welcome, <Text className="font-tt-commons-bold">You</Text>
+        <Text className="text-[32px]  font-normal">
+            Welcome, <Text className="font-[600] font-sans">You</Text>
         </Text>
 
         <Image
@@ -66,16 +72,14 @@ export default function Login({ navigation }) {
     </>
     const findCareDocsDescription = `Every great feature you need for seamless care management is right at your fingertips.`;
 
-
-    let iconName = "eye-off";
-    if (isPasswordOpen) {
-        iconName = "eye"
+    const handleTogglePassword = () => {
+        setIsPasswordOpen(!isPasswordOpen);
     }
 
     return (
 
         <View
-            className={`font-sans justify-center min-h-screen items-center xl:justify-center  lg:px-20`}>
+            className={` justify-center min-h-screen items-center xl:justify-center  lg:px-20`}>
 
             <View className="flex flex-col-reverse xl:flex-row flex-wrap justify-between w-full items-center" style={{ gap: '20px' }}>
                 {/* Left Area */}
@@ -130,7 +134,7 @@ export default function Login({ navigation }) {
                                     Welcome back!
                                 </Text>
 
-                                <Text className="mt-[12px] text-[16px] font-sans lead-[22px]">
+                                <Text className="mt-[12px] text-[16px]  lead-[22px]">
                                     Manage your facility administration process more easily with CareDocs.
                                 </Text>
                             </Card>
@@ -155,7 +159,8 @@ export default function Login({ navigation }) {
                                     value={password}
                                     onChange={handleChange(setPassword)}
                                     secureTextEntry={!isPasswordOpen ? true : false}
-                                    icon={<Feather name={iconName} size={20} color="#828282" onPress={setIsPasswordOpen} />}
+                                    // icon={<Feather name={iconName} size={20} color="#828282" onPress={setIsPasswordOpen} />}
+                                    icon={<Button onPress={handleTogglePassword}>{passwordIcon}</Button>}
                                 />
 
                                 {
@@ -188,7 +193,7 @@ export default function Login({ navigation }) {
 
 
                                 <View className="flex flex-row text-[14px] items-center">
-                                    <Text className="font-sans font-normal">Looking to get started? </Text>
+                                    <Text className=" font-normal">Looking to get started? </Text>
                                     <Link
                                         className="text-purple"
                                         navigation={navigation}

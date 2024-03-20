@@ -1,7 +1,12 @@
 import { View, Text, Pressable } from 'react-native'
 import { Fragment, useState } from 'react'
 
-export default function Table({ data, config, keyFn, handleRowData }) {
+export default function Table({ 
+    data, 
+    config, 
+    keyFn, 
+    handleRowData
+}) {
     const [ isRowPressed, setIsRowPressed ] = useState(false);
     const [ activeRow, setActiveRow ] = useState(0);
 
@@ -41,7 +46,7 @@ export default function Table({ data, config, keyFn, handleRowData }) {
         });
 
         return (
-            <Pressable className={`table-row text-left z-[-1] ${ activeRow == rowIndex && isRowPressed ? 'custom-shadow rounded-xl' : '' }`}  onPress={() => handlePressedRow(rowData, rowIndex)} key={keyFn(rowData)} align="center">
+            <Pressable className={`table-row text-left ${ activeRow == rowIndex && isRowPressed ? 'custom-shadow rounded-xl' : '' }`}  onPress={() => handlePressedRow(rowData, rowIndex)} key={keyFn(rowData)} align="center">
                 {renderedCells}
             </Pressable>
         );

@@ -249,7 +249,7 @@ export default function ChooseYourPackage({ navigation }) {
 
                 <Text className="text-[48px] font-tt-commons-medium font-[600] leading-[56px]">Choose your package</Text>
 
-                <Text className="text-[14px] font-sans text-center font-[400] leading-5">Let’s make your administration process more easily with CareDocs.</Text>
+                <Text className="text-[14px]  text-center font-[400] leading-5">Let’s make your administration process more easily with CareDocs.</Text>
             </View>
 
             <View className="mt-[32px]">
