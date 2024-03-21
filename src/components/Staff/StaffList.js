@@ -12,7 +12,7 @@ import DeleteConfirmationModal from '../DeleteConfirmationModal'
 
 export default function StaffList() {
 
-    const navigator = useNavigation();
+    const navigation = useNavigation();
 
     const { setActiveRowStaff } = useStaffListStore();
 
@@ -23,7 +23,7 @@ export default function StaffList() {
     const { isDeleteModalShow, handleModalClose, handleModalOpen } = useDeleteModal();
 
     const handleDeleteStaff = () => {
-        handleModalOpen();
+        handleModalClose();
     };
 
     const data = [
@@ -114,8 +114,8 @@ export default function StaffList() {
                 return (
                     <EllipsesButton
                         color={iconColor}
-                        handleEditButton={() => navigator.navigate('edit-staff')}
-                        handleDeleteButton={handleDeleteStaff}
+                        handleEditButton={() => navigation.navigate('edit-staff')}
+                        handleDeleteButton={handleModalOpen}
                     />
                 )
             }
@@ -134,7 +134,10 @@ export default function StaffList() {
                 keyFn={keyFn}
                 handleRowData={handleRowData} />
 
-            {<DeleteConfirmationModal handleClose={handleModalClose} showModal={isDeleteModalShow} />}
+            {isDeleteModalShow && <DeleteConfirmationModal
+                handleClose={handleModalClose}
+                handleDelete={handleDeleteStaff}
+                showModal={isDeleteModalShow} />}
 
         </>
 

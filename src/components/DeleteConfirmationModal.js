@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import PopupModal from './PopUpModal'
 import Button from './Button';
 
-export default function DeleteConfirmationModal({ handleClose, handleOpen, showModal = false }) {
+export default function DeleteConfirmationModal({ handleClose, handleOpen, handleDelete, showModal = false }) {
     const actionBar = (
         <View className="flex" style={{ gap: '11px' }}>
             <Button
-                onPress={handleClose}
+                onPress={handleDelete}
                 danger >
                 Delete
             </Button>

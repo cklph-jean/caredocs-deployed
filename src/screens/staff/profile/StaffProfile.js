@@ -1,10 +1,11 @@
 import { View, Text, Image } from 'react-native'
 import AdminLayout from '../../../layout/AdminLayout'
-import StaffCard from '../StaffCard'
-import StaffForm from '../StaffForm'
+import FormCard from '../../../components/FormCard'
+import StaffForm from '../../../components/Staff/StaffForm'
 import Button from '../../../components/Button'
 import ChevronLeft from "../../../assets/svg/ChevronLeft.svg";
 import EditIcon from "../../../assets/svg/EditIconGreen.svg";
+import PageTitleComponent from '../../../components/PageTitleComponent'
 
 
 export default function StaffProfile({ navigation }) {
@@ -14,12 +15,10 @@ export default function StaffProfile({ navigation }) {
                 <View className="flex flex-auto flex-col my-[32px]" style={{ gap: '24px' }}>
                     <View className="flex flex-row justify-between items-center">
                         {/* Title */}
-                        <Text className="text-[28px] font-tt-commons-medium">
-                            Staff Profile: John Salvatore Doe
-                        </Text>
+                        <PageTitleComponent title="Staff Profile: John Salvatore Doe" />
                     </View>
 
-                    <StaffCard>
+                    <FormCard>
 
                         <View className="flex flex-row justify-between items-center px-[24px] pb-[24px] pt-[16px]">
                             <View>
@@ -48,7 +47,7 @@ export default function StaffProfile({ navigation }) {
 
 
                         <StaffForm manage="profile" />
-                    </StaffCard>
+                    </FormCard>
                 </View>
             </View>
         </AdminLayout>

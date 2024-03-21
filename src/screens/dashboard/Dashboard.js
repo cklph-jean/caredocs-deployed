@@ -7,6 +7,7 @@ import WarningIcon from "../../assets/svg/dashboard/facility/warning.svg";
 import ResidentialNoteIcon from "../../assets/svg/dashboard/ResidentialNoteIcon.svg";
 import CommunicationsIcon from "../../assets/svg/dashboard/CommunicationsIcon.svg";
 import RegardingToPerson from "../../assets/svg/Person2.png";
+import PageTitleComponent from "../../components/PageTitleComponent"
 
 const importantResidentialNoteData = [
     {
@@ -328,9 +329,7 @@ export default function Dashboard() {
             <View className="flex flex-col px-[70px] my-[32px]" style={{ gap: '24px' }}>
                 <View className="flex flex-row justify-between items-center">
                     {/* Title */}
-                    <Text className="text-[28px] font-tt-commons-medium">
-                        Dashboard
-                    </Text>
+                    <PageTitleComponent title="Dashbard" />
 
                     {/* Toolbar Section */}
                     <View>

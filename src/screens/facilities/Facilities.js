@@ -4,9 +4,9 @@ import Button from "../../components/Button";
 import AddIconWhite from "../../assets/svg/AddIconWhite.svg";
 import ImportIconGreen from "../../assets/svg/ImportIconGreen.svg";
 import FacilityTile from "./FacilityTile";
-import { Fragment } from "react";
+import PageTitleComponent from "../../components/PageTitleComponent";
 
-export default function Facilities() {
+export default function Facilities({ navigation }) {
   const data = [
     {
       id: "1234",
@@ -93,14 +93,15 @@ export default function Facilities() {
       <View className=" px-[70px] my-[32px]">
 
         <View className="flex flex-row justify-between">
-          <Text className="text-[28px] font-tt-commons-medium">Facilities</Text>
+          <PageTitleComponent title="Facilities"/>
+
           <View className="flex flex-row">
             <Button secondary>
               <Image source={ImportIconGreen} className="mr-[6px]" />
               Import From CSV File
             </Button>
 
-            <Button primary className="ml-[24px]">
+            <Button onPress={() => navigation.navigate('create-facility') } primary className="ml-[24px]">
               <Image source={AddIconWhite} className="mr-[6px]" />
               Create New Facility
             </Button>

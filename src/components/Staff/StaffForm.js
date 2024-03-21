@@ -1,37 +1,10 @@
 import { View, Text, Image } from 'react-native'
-import { facilities } from '../../components/SideBar/FacilityDetails';
-import DropdownSelect from '../../components/DropdownSelect'
+import { facilities } from '../SideBar/FacilityDetails';
+import DropdownSelect from '../DropdownSelect'
 import GalleryIcon from "../../assets/svg/GalleryIcon.svg"
-import InputField from '../../components/InputField'
-import Input from '../../components/Input'
-
-
-// Todo Move in Separate file
-function SectionTitle({ title }) {
-    return (
-        <>
-            <View className="flex flex-row justify-center items-center" style={{ gap: '16px' }}>
-                <View className="border-b w-[40%] border-gray-50"></View>
-                <Text className="text-center italic text-[#A0A0A0] text-[12px]"> {title} </Text>
-                <View className="border-b w-[40%] border-gray-50"></View>
-            </View>
-        </>
-    )
-}
-
-// Todo Move in Separate file
-function DateInput({ label, placeholderDD, placeholderMM, placeholderYY }) {
-    return (
-        <View className="" style={{ gap: 4 }}>
-            <Text className="text-[14px] text-[#828282]">{label}</Text>
-            <View className="grid grid-cols-3" style={{ gap: 8 }}>
-                <Input placeholder={placeholderDD} value="" />
-                <Input placeholder={placeholderMM} value="" />
-                <Input placeholder={placeholderYY} value="" />
-            </View>
-        </View>
-    );
-}
+import InputField from '../InputField'
+import SectionTitleHorizontal from '../SectionTitleHorizontal'
+import DateInput from '../DateInput'
 
 export default function StaffForm({ manage = null }) {
 
@@ -128,7 +101,7 @@ export default function StaffForm({ manage = null }) {
 
             <View className="flex-auto" style={{ gap: 32 }}>
 
-                <SectionTitle title="Basic Information" />
+                <SectionTitleHorizontal title="Basic Information" />
 
                 <View style={{ gap: 16 }}>
                     <View className="grid grid-cols-4" style={{ gap: 24 }}>
@@ -270,7 +243,7 @@ export default function StaffForm({ manage = null }) {
 
                 </View>
 
-                <SectionTitle title="Staff Information" />
+                <SectionTitleHorizontal title="Staff Information" />
 
                 <View style={{ gap: 16 }}>
 

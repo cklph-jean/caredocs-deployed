@@ -1,9 +1,10 @@
 import { View, Text, Image } from 'react-native'
 import AdminLayout from '../../../layout/AdminLayout'
-import StaffCard from '../StaffCard'
+import FormCard from '../../../components/FormCard'
 import Button from '../../../components/Button'
 import SaveIcon from "../../../assets/svg/SaveIcon.svg"
-import StaffForm from '../StaffForm'
+import StaffForm from '../../../components/Staff/StaffForm'
+import PageTitleComponent from '../../../components/PageTitleComponent'
 
 export default function CreateStaff({ navigation }) {
   return (
@@ -12,12 +13,11 @@ export default function CreateStaff({ navigation }) {
         <View className="flex flex-auto flex-col my-[32px]" style={{ gap: '24px' }}>
           <View className="flex flex-row justify-between items-center">
             {/* Title */}
-            <Text className="text-[28px] font-tt-commons-medium">
-              Create Staff
-            </Text>
+            <PageTitleComponent title="Create Staff" />
+
           </View>
 
-          <StaffCard>
+          <FormCard>
             {/* Toolbar */}
             <View className="flex flex-row justify-end items-center px-[24px] pb-[24px] pt-[16px]">
               <View className="flex flex-row" style={{ gap: 10 }}>
@@ -44,7 +44,7 @@ export default function CreateStaff({ navigation }) {
 
             <StaffForm manage="create" />
 
-          </StaffCard>
+          </FormCard>
         </View>
       </View>
     </AdminLayout>

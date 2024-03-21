@@ -21,9 +21,9 @@ export default function StaffRightSideBar() {
 
     const { isDeleteModalShow, handleModalClose, handleModalOpen } = useDeleteModal();
 
-
     const handleDeleteStaff = () => {
-        handleModalOpen();
+        handleModalClose();
+        navigation.navigate('staff')
     };
 
     let content = "";
@@ -125,7 +125,7 @@ export default function StaffRightSideBar() {
                     </Button>
                     <Button
                         danger
-                        onPress={handleDeleteStaff}
+                        onPress={handleModalOpen}
                         className="px-[18px] py-[12px]">
                         <Image
                             source={DeleteIcon}
@@ -191,7 +191,11 @@ export default function StaffRightSideBar() {
             <RightSideBar>
                 {content}
 
-                {<DeleteConfirmationModal handleClose={handleModalClose} showModal={isDeleteModalShow} />}
+                {isDeleteModalShow && <DeleteConfirmationModal
+                    handleClose={handleModalClose}
+                    handleDelete={handleDeleteStaff}
+                    showModal={isDeleteModalShow}
+                />}
             </RightSideBar>
         </>
     )

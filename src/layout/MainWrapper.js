@@ -27,6 +27,8 @@ import { useEffect, useState } from "react";
 import CreateStaff from "../screens/staff/create-staff";
 import EditStaff from "../screens/staff/edit-staff";
 import StaffProfile from "../screens/staff/profile";
+import CreateFacility from "../screens/facilities/create-facilty";
+import EditFacility from "../screens/facilities/edit-facility";
 
 // End of Signed In Stacks
 
@@ -49,12 +51,14 @@ const SignedInNavigator = () => {
     return (
         <SignedInStack.Navigator>
             <SignedInStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="facilities" component={Facilities} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="edit-facility" component={EditFacility} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="create-staff" component={CreateStaff} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="create-facility" component={CreateFacility} options={{ headerShown: false }} />
             <SignedInStack.Screen name="communication" component={Communication} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residential-notes" component={ResidentialNotes} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residents" component={Residents} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="create-staff" component={CreateStaff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="edit-staff" component={EditStaff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="staff-profile" component={StaffProfile} options={{ headerShown: false }} />
         </SignedInStack.Navigator>

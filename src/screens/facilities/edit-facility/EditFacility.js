@@ -2,22 +2,26 @@ import { View, Text, Image } from 'react-native'
 import { useState } from 'react';
 import AdminLayout from '../../../layout/AdminLayout'
 import FormCard from '../../../components/FormCard'
-import DeleteConfirmationModal from '../../../components/DeleteConfirmationModal';
-import DeleteIcon from "../../../assets/svg/DeleteIconRed.svg";
-import SaveIcon from "../../../assets/svg/SaveIcon.svg"
+import SaveIcon from '../../../assets/svg/SaveIcon.svg';
+import DeleteIcon from '../../../assets/svg/DeleteIconRed.svg';
 import Button from '../../../components/Button';
-import StaffForm from '../../../components/Staff/StaffForm';
+import FacilityForm from '../../../components/Facilities/FacilityForm';
+import DeleteConfirmationModal from '../../../components/DeleteConfirmationModal';
 import PageTitleComponent from '../../../components/PageTitleComponent';
+import ChevronLeft from "../../../assets/svg/ChevronLeft.svg";
 import useDeleteModal from '../../../hooks/useDeleteModal';
 
-export default function EditStaff({ navigation }) {
-   
+
+export default function EditFacility({ navigation }) {
+
     const { isDeleteModalShow, handleModalClose, handleModalOpen } = useDeleteModal();
 
-    const handleDeleteStaff = () => {
+    const handleDeleteFacility = () => {
         handleModalClose();
-        navigation.navigate('staff')
-    };
+
+        navigation.navigate('facilities')
+    }
+
 
     return (
         <AdminLayout>
@@ -25,17 +29,30 @@ export default function EditStaff({ navigation }) {
                 <View className="flex flex-auto flex-col my-[32px]" style={{ gap: '24px' }}>
                     <View className="flex flex-row justify-between items-center">
                         {/* Title */}
-                       <PageTitleComponent title="Edit Staff: John Salvatore Doe"/>
+                        <PageTitleComponent title="Edit Facility: Opportunity Haven" />
                     </View>
+
+                    {/* Call Form Card */}
 
                     <FormCard>
                         {/* Toolbar */}
-                        <View className="flex flex-row justify-end items-center px-[24px] pb-[24px] pt-[16px]">
+                        <View className="flex flex-row justify-between items-center pb-[24px] pt-[16px]">
+                            <View>
+                                <Button
+                                    onPress={() => navigation.navigate('facilities')}
+                                    className="flex flex-col items-center"
+                                    textClass="text-purple text-[16px] font-[600]">
+                                    <Image
+                                        source={ChevronLeft}
+                                    />
+                                    Back to Facility List
+                                </Button>
+                            </View>
                             <View className="flex flex-row" style={{ gap: 10 }}>
                                 <Button
                                     secondary
                                     className="px-[18px]"
-                                    onPress={() => navigation.navigate('staff')}>
+                                    onPress={() => navigation.navigate('facilities')}>
                                     <Text className="font-sans font-[600]">
                                         Cancel
                                     </Text>
@@ -51,26 +68,28 @@ export default function EditStaff({ navigation }) {
                                         className="w-[16px] h-[16px]"
                                     />
                                     <Text className="font-sans font-[600] text-white pl-[6px]">
-                                        Delete This Staff
+                                        Delete This Facility
                                     </Text>
                                 </Button>
 
-                                <Button onPress={() => navigation.navigate('staff')} primary className="px-[18px] flex flex-col items-center">
+
+                                <Button onPress={() => navigation.navigate('facilities')} primary className="px-[18px] flex flex-col items-center">
                                     <Image
                                         source={SaveIcon}
                                     />
                                     <Text className="font-sans font-[600] text-white pl-[6px]">
-                                        Save Staff
+                                        Save Facility
                                     </Text>
                                 </Button>
                             </View>
                         </View>
                         {/* Toolbar */}
 
-                        <StaffForm manage="edit" />
+                        <FacilityForm manage="create" />
 
                     </FormCard>
                 </View>
+
             </View>
 
             {
@@ -78,7 +97,7 @@ export default function EditStaff({ navigation }) {
                 (
                     <DeleteConfirmationModal
                         handleClose={handleModalClose}
-                        handleDelete={handleDeleteStaff}
+                        handleDelete={handleDeleteFacility}
                         showModal={isDeleteModalShow}
                     />
                 )

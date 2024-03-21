@@ -3,6 +3,8 @@ import AdminLayout from '../../layout/AdminLayout'
 import PlusIcon from '../../assets/svg/PlusIcon.svg'
 import ImportIcon from '../../assets/svg/ImportIcon.svg'
 import Button from '../../components/Button'
+import PageTitleComponent from "../../components/PageTitleComponent"
+
 
 import StaffList from '../../components/Staff/StaffList'
 import StaffRightSideBar from '../../components/Staff/StaffRightSideBar'
@@ -15,9 +17,7 @@ export default function Staff({ navigation }) {
                 <View className="flex flex-auto flex-col my-[32px]" style={{ gap: '24px' }}>
                     <View className="flex flex-row justify-between items-center">
                         {/* Title */}
-                        <Text className="text-[28px] font-tt-commons-medium">
-                            Staff
-                        </Text>
+                        <PageTitleComponent title="Staff" />
 
                         {/* Toolbar Section */}
                         <View className="flex flex-row" style={{ gap: '24px' }}>
