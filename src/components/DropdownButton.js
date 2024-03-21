@@ -13,7 +13,7 @@ export default function DropdownButton({ img, fn, text, ...rest }) {
   return (
     <Pressable {...rest} className={classes}>
       <Image source={img} className="mr-[6px]" />
-      <Text>
+      <Text className="font-sans font-bold">
         {text}
       </Text>
     </Pressable>

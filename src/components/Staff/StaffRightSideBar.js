@@ -93,13 +93,17 @@ export default function StaffRightSideBar() {
                                 </Text>
                             </View>
 
-                            <Text className="text-purple font-sans font-[600] flex justify-center items-center text-[16px]  text-center">
-                                Show Full Information
-                                <Image
-                                    className="ml-[4px]"
-                                    source={RightArrowIcon}
-                                />
-                            </Text>
+                            <Button
+                                onPress={() => navigation.navigate('staff-profile')}
+                            >
+                                <Text className="text-purple font-sans font-[600] flex justify-center items-center text-[16px]  text-center">
+                                    Show Full Information
+                                    <Image
+                                        className="ml-[4px]"
+                                        source={RightArrowIcon}
+                                    />
+                                </Text>
+                            </Button>
                         </View>
                     </View>
                 </View>

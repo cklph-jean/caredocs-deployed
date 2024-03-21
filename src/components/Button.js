@@ -53,7 +53,7 @@ export default function Button({
             "text-danger-500": danger && outline,
             "text-white": (danger && !outline || primary && !disabled),
         },
-        rest.textClass
+        textClass
     )
 
     return (

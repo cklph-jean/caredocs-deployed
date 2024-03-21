@@ -26,6 +26,7 @@ import { retrieveData } from '../utils/asyncStorage';
 import { useEffect, useState } from "react";
 import CreateStaff from "../screens/staff/create-staff";
 import EditStaff from "../screens/staff/edit-staff";
+import StaffProfile from "../screens/staff/profile";
 
 // End of Signed In Stacks
 
@@ -47,12 +48,13 @@ const SignedOutNavigator = () => {
 const SignedInNavigator = () => {
     return (
         <SignedInStack.Navigator>
+            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="staff-profile" component={StaffProfile} options={{ headerShown: false }} />
+            <SignedInStack.Screen name="facilities" component={Facilities} options={{ headerShown: false }} />
             <SignedInStack.Screen name="dashboard" component={Dashboard} options={{ headerShown: false }} />
             <SignedInStack.Screen name="communication" component={Communication} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residential-notes" component={ResidentialNotes} options={{ headerShown: false }} />
             <SignedInStack.Screen name="residents" component={Residents} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="facilities" component={Facilities} options={{ headerShown: false }} />
-            <SignedInStack.Screen name="staff" component={Staff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="create-staff" component={CreateStaff} options={{ headerShown: false }} />
             <SignedInStack.Screen name="edit-staff" component={EditStaff} options={{ headerShown: false }} />
         </SignedInStack.Navigator>
@@ -85,7 +87,7 @@ export default function MainWrapper() {
                 const token = await retrieveData('token');
                 setIsLoggedIn((token || isAuthenticated) && !isLoggedOut);
 
-                if ( token ) {
+                if (token) {
                     const userData = await retrieveData('userData');
 
                     setUser(JSON.parse(userData))
