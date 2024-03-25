@@ -177,7 +177,7 @@ export default function MainWrapper() {
       }}
     >
       <View className="z-[1] flex-1 w-full bg-cover overflow-y-auto relative">
-        <Image source={BgImage} className="absolute h-[100%] w-[100%]" />
+        <Image source={BgImage} className="fixed h-[100%] w-[100%] " />
         <View className="w-full">
           {!isLoggedIn ? <SignedOutNavigator /> : <SignedInNavigator />}
         </View>
